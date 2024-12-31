@@ -15,8 +15,6 @@
         {
             base.Update();
             player.animator.SetFloat("yVelocity", player.rb.velocity.y);
-            
-            // FIX: 这里由于GroundCheck在短时间内还是会检测到地面所以又会进入到IdleState！而不处于AirState！
             if (player.GroundedCheck()) stateMachine.ChangeState(player.idleState);
         }
 

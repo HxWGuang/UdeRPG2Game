@@ -9,14 +9,15 @@
         public override void Enter()
         {
             base.Enter();
-            this.dashTimer = player.dashTime;
+            player.dashTimer = player.dashDuration;
+            player.dashCDTimer = player.dashCD;
         }
 
         public override void Update()
         {
             base.Update();
-            this.player.SetVelocity(player.dashSpeed * player.facingDir, 0);
-            if (dashTimer <= 0) stateMachine.ChangeState(player.idleState);
+            this.player.SetVelocity(player.dashSpeed * player.dashDir, 0);
+            if (player.dashTimer <= 0) stateMachine.ChangeState(player.idleState);
         }
 
         public override void Exit()
