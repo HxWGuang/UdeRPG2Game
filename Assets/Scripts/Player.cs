@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
+using PlayerStateMachine;
 using UnityEngine;
 
 public class Player : MonoBehaviour

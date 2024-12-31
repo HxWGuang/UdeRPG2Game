@@ -1,24 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using UnityEngine;
-
-public class StateMachine
+namespace PlayerStateMachine
 {
-    public PlayerState currentState { get; private set; }
-
-    public void Init(PlayerState state)
+    public class StateMachine
     {
-        this.ChangeState(state);
-    }
+        public PlayerState currentState { get; private set; }
 
-    public void ChangeState(PlayerState newState)
-    {
-        if (currentState != null)
+        public void Init(PlayerState state)
         {
-            currentState.Exit();
+            this.ChangeState(state);
         }
-        currentState = newState;
-        currentState.Enter();
+
+        public void ChangeState(PlayerState newState)
+        {
+            if (currentState != null)
+            {
+                currentState.Exit();
+            }
+
+            currentState = newState;
+            currentState.Enter();
+        }
     }
 }

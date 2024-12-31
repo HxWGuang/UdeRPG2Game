@@ -1,4 +1,4 @@
-﻿namespace DefaultNamespace
+﻿namespace PlayerStateMachine
 {
     public class PlayerMoveState : PlayerState
     {

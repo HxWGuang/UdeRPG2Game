@@ -2,7 +2,7 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace DefaultNamespace.Utils
+namespace Utils
 {
     public static class GameObjectExtensions
     {
