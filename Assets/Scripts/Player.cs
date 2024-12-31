@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform wallCheckPos;
     [SerializeField] private float wallCheckDis;
     [SerializeField] private LayerMask wallLayer;
+
+    public int facingDir = 1;
+    public bool facingRight = true;
     
     #region Component
 
@@ -60,13 +63,29 @@ public class Player : MonoBehaviour
     public void SetVelocity(float xInput, float yInput)
     {
         rb.velocity = new Vector2(xInput, yInput);
+        FlipController(xInput);
+    }
+
+    private void FlipController(float _x)
+    {
+        if (_x > 0 && !facingRight) Flip();
+        else if (_x < 0 && facingRight) Flip();
+    }
+
+    private void Flip()
+    {
+        facingDir *= -1;
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
     }
     
     public bool GroundedCheck() => Physics2D.Raycast(groundCheckPos.position, Vector2.down, groundCheckDis, groundLayer);
+    public bool WallCheck() => Physics2D.Raycast(wallCheckPos.position, Vector3.right * facingDir, wallCheckDis, wallLayer);
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(groundCheckPos.position, Vector2.down * groundCheckDis);
+        Gizmos.DrawRay(wallCheckPos.position, Vector3.right * facingDir * wallCheckDis);
     }
 }
