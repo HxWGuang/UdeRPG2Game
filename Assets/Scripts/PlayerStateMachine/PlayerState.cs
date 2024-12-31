@@ -9,6 +9,7 @@ namespace PlayerStateMachine
         public string animBoolParaName { get; private set; }
 
         public float _xInput;
+        protected float dashTimer;
 
         public PlayerState(Player player, StateMachine stateMachine, string animBoolParaName)
         {
@@ -25,6 +26,7 @@ namespace PlayerStateMachine
         public virtual void Update()
         {
             this._xInput = Input.GetAxisRaw("Horizontal");
+            this.dashTimer -= Time.deltaTime;
         }
 
         public virtual void Exit()
