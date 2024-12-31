@@ -1,11 +1,21 @@
+using System;
 using PlayerStateMachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
     [Header("Move Info")]
     public float moveSpeed = 10f;
     public float jumpForce = 12f;
+    
+    [Header("Collision Info")] 
+    [SerializeField] private Transform groundCheckPos;
+    [SerializeField] private float groundCheckDis;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform wallCheckPos;
+    [SerializeField] private float wallCheckDis;
+    [SerializeField] private LayerMask wallLayer;
     
     #region Component
 
@@ -50,5 +60,13 @@ public class Player : MonoBehaviour
     public void SetVelocity(float xInput, float yInput)
     {
         rb.velocity = new Vector2(xInput, yInput);
+    }
+    
+    public bool GroundedCheck() => Physics2D.Raycast(groundCheckPos.position, Vector2.down, groundCheckDis, groundLayer);
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(groundCheckPos.position, Vector2.down * groundCheckDis);
     }
 }

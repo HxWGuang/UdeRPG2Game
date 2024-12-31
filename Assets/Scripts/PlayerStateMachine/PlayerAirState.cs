@@ -15,7 +15,7 @@
         {
             base.Update();
             player.animator.SetFloat("yVelocity", player.rb.velocity.y);
-            if (player.rb.velocity.y == 0) stateMachine.ChangeState(player.idleState);
+            if (player.GroundedCheck()) stateMachine.ChangeState(player.idleState);
         }
 
         public override void Exit()
