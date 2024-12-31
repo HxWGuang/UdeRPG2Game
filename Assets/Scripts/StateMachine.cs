@@ -9,7 +9,7 @@ public class StateMachine
 
     public void Init(PlayerState state)
     {
-        this.currentState = state;
+        this.ChangeState(state);
     }
 
     public void ChangeState(PlayerState newState)

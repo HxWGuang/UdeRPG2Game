@@ -2,7 +2,7 @@
 {
     public class PlayerIdleState : PlayerState
     {
-        public PlayerIdleState(Player player, StateMachine stateMachine, string animName) : base(player, stateMachine, animName)
+        public PlayerIdleState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
         }
 

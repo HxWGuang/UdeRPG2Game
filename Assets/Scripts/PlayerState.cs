@@ -6,18 +6,18 @@ public class PlayerState
 {
     public Player player { get; private set; }
     public StateMachine stateMachine { get; private set; }
-    public string animName { get; private set; }
+    public string animBoolParaName { get; private set; }
 
-    public PlayerState(Player player, StateMachine stateMachine, string animName)
+    public PlayerState(Player player, StateMachine stateMachine, string animBoolParaName)
     {
         this.player = player;
         this.stateMachine = stateMachine;
-        this.animName = animName;
+        this.animBoolParaName = animBoolParaName;
     }
 
     public virtual void Enter()
     {
-        
+        this.player.animator.SetBool(animBoolParaName, true);
     }
 
     public virtual void Update()
@@ -27,6 +27,6 @@ public class PlayerState
 
     public virtual void Exit()
     {
-        
+        this.player.animator.SetBool(animBoolParaName, false);
     }
 }
