@@ -1,6 +1,6 @@
 ﻿namespace PlayerStateMachine
 {
-    public class PlayerMoveState : PlayerState
+    public class PlayerMoveState : PlayerGroundedState
     {
         public PlayerMoveState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {

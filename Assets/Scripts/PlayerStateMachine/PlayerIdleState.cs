@@ -1,6 +1,6 @@
 ﻿namespace PlayerStateMachine
 {
-    public class PlayerIdleState : PlayerState
+    public class PlayerIdleState : PlayerGroundedState
     {
         public PlayerIdleState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
