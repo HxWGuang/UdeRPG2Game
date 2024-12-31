@@ -16,7 +16,7 @@ namespace PlayerStateMachine
         public override void Update()
         {
             base.Update();
-            if (Input.GetKey(KeyCode.Space) && player.GroundedCheck()) stateMachine.ChangeState(player.jumpState);
+            if (Input.GetKeyDown(KeyCode.Space) && player.GroundedCheck()) stateMachine.ChangeState(player.jumpState);
             if (Input.GetKeyDown(KeyCode.LeftShift)) stateMachine.ChangeState(player.dashState);
         }
 

@@ -15,7 +15,7 @@
         public override void Update()
         {
             base.Update();
-            this.player.SetVelocity(player.dashSpeed * player.facingDir, player.rb.velocity.y);
+            this.player.SetVelocity(player.dashSpeed * player.facingDir, 0);
             if (dashTimer <= 0) stateMachine.ChangeState(player.idleState);
         }
 

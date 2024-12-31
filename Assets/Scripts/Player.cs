@@ -1,7 +1,5 @@
-using System;
 using PlayerStateMachine;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -46,7 +44,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         
         stateMachine = new StateMachine();
-        
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
         moveState = new PlayerMoveState(this, stateMachine, "Move");
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
