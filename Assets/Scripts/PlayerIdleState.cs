@@ -14,6 +14,11 @@
         public override void Update()
         {
             base.Update();
+
+            if (_xInput != 0)
+            {
+                stateMachine.ChangeState(player.moveState);
+            }
         }
 
         public override void Exit()

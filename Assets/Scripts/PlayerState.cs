@@ -8,6 +8,8 @@ public class PlayerState
     public StateMachine stateMachine { get; private set; }
     public string animBoolParaName { get; private set; }
 
+    public float _xInput;
+
     public PlayerState(Player player, StateMachine stateMachine, string animBoolParaName)
     {
         this.player = player;
@@ -22,7 +24,7 @@ public class PlayerState
 
     public virtual void Update()
     {
-        
+        this._xInput = Input.GetAxisRaw("Horizontal");
     }
 
     public virtual void Exit()
