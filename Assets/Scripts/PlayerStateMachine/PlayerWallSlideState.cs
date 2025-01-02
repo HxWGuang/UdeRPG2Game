@@ -1,4 +1,6 @@
-﻿namespace PlayerStateMachine
+﻿using UnityEngine;
+
+namespace PlayerStateMachine
 {
     public class PlayerWallSlideState : PlayerState
     {
@@ -14,12 +16,18 @@
         public override void Update()
         {
             base.Update();
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                stateMachine.ChangeState(player.wallJumpState);
+                return;
+            }
             
             // 降低下滑的速度
             if (_yInput < 0)
-                player.SetVelocity(0, player.rb.velocity.y);
+                player.rb.velocity = new Vector2(0, player.rb.velocity.y);
             else
-                player.SetVelocity(0, player.rb.velocity.y * .7f);
+                player.rb.velocity = new Vector2(0, player.rb.velocity.y * .7f);
 
             if (_xInput != 0 && _xInput != player.facingDir)
                 stateMachine.ChangeState(player.idleState);

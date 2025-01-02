@@ -17,9 +17,7 @@
             // move player
             player.SetVelocity(player.moveSpeed * _xInput, player.rb.velocity.y);
 
-            if (_xInput == 0)
-                stateMachine.ChangeState(player.idleState);
-            if (player.WallCheck())
+            if (_xInput == 0 || player.WallCheck())
                 stateMachine.ChangeState(player.idleState);
         }
 

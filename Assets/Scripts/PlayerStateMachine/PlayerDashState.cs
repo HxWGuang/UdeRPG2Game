@@ -9,15 +9,19 @@
         public override void Enter()
         {
             base.Enter();
-            player.dashTimer = player.dashDuration;
+            player.stateTimer = player.dashDuration;
             player.dashCDTimer = player.dashCD;
         }
 
         public override void Update()
         {
             base.Update();
+
+            if (player.WallCheck() && !player.GroundedCheck())
+                stateMachine.ChangeState(player.wallSlideState);
+            
             this.player.SetVelocity(player.dashSpeed * player.dashDir, 0);
-            if (player.dashTimer <= 0) stateMachine.ChangeState(player.idleState);
+            if (player.stateTimer <= 0) stateMachine.ChangeState(player.idleState);
         }
 
         public override void Exit()

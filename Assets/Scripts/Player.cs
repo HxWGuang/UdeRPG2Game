@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public float dashSpeed = 25f;
     public float dashDuration = 0.2f;
     public float dashCD = 1f;
-    public float dashTimer;
+    public float stateTimer;
     public float dashCDTimer;
     public float dashDir;
     
@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     public PlayerAirState airState { get; private set; }
     public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerDashState dashState { get; private set; }
+    public PlayerWallJumpState wallJumpState { get; private set; }
 
     #endregion
 
@@ -57,6 +58,7 @@ public class Player : MonoBehaviour
         airState  = new PlayerAirState(this, stateMachine, "Jump");
         wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
         dashState = new PlayerDashState(this, stateMachine, "Dash");
+        wallJumpState = new PlayerWallJumpState(this, stateMachine, "WallJump");
     }
 
     void Start()
@@ -72,6 +74,8 @@ public class Player : MonoBehaviour
 
     private void CheckDashInput()
     {
+        if (WallCheck()) return;
+        
         if (Input.GetKeyDown(KeyCode.LeftShift) && dashCDTimer <= 0)
         {
             dashDir = Input.GetAxisRaw("Horizontal");

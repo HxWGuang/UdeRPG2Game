@@ -27,7 +27,7 @@ namespace PlayerStateMachine
         {
             this._xInput = Input.GetAxisRaw("Horizontal");
             this._yInput = Input.GetAxisRaw("Vertical");
-            player.dashTimer -= Time.deltaTime;
+            player.stateTimer -= Time.deltaTime;
             player.dashCDTimer -= Time.deltaTime;
         }
 
