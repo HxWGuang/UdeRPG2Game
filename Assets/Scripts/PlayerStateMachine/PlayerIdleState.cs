@@ -15,10 +15,11 @@
         {
             base.Update();
 
+            if (_xInput == player.facingDir && player.WallCheck())
+                return;
+            
             if (_xInput != 0)
-            {
                 stateMachine.ChangeState(player.moveState);
-            }
         }
 
         public override void Exit()

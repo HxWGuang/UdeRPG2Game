@@ -18,9 +18,9 @@
             player.SetVelocity(player.moveSpeed * _xInput, player.rb.velocity.y);
 
             if (_xInput == 0)
-            {
                 stateMachine.ChangeState(player.idleState);
-            }
+            if (player.WallCheck())
+                stateMachine.ChangeState(player.idleState);
         }
 
         public override void Exit()
