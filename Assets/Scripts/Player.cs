@@ -1,5 +1,6 @@
 using Hx.PlayerStateMachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Hx
 {
@@ -15,8 +16,8 @@ namespace Hx
         public float dashCDTimer;
         public float dashDir;
 
-        [Header("Collision Info")] [SerializeField]
-        private Transform groundCheckPos;
+        [Header("Collision Info")] 
+        [SerializeField] private Transform groundCheckPos;
 
         [SerializeField] private float groundCheckDis;
         [SerializeField] private LayerMask groundLayer;
@@ -24,6 +25,10 @@ namespace Hx
         [SerializeField] private float wallCheckDis;
         [SerializeField] private LayerMask wallLayer;
 
+        [Header("Attack")] 
+        public float ComboWindow = 1f;
+
+        [Space]
         public int facingDir = 1;
         public bool facingRight = true;
 
