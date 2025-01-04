@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 501584955}
   - component: {fileID: 501584958}
   - component: {fileID: 501584957}
+  - component: {fileID: 501584959}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -304,7 +305,7 @@ MonoBehaviour:
   dashSpeed: 25
   dashDuration: 0.2
   dashCD: 1
-  dashTimer: 0
+  stateTimer: 0
   dashCDTimer: 0
   dashDir: 0
   groundCheckPos: {fileID: 814441420}
@@ -340,6 +341,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &501584959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501584954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd03b0a1a684ba49e1200782a33d7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +732,7 @@ GameObject:
   - component: {fileID: 2022158827}
   - component: {fileID: 2022158829}
   - component: {fileID: 2022158830}
+  - component: {fileID: 2022158831}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -814,3 +828,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2022158831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022158826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722c483332534121a7dd038af896832c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

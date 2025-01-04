@@ -1,4 +1,4 @@
-namespace PlayerStateMachine
+namespace Hx.PlayerStateMachine
 {
     public class StateMachine
     {

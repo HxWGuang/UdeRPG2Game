@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PlayerStateMachine
+namespace Hx.PlayerStateMachine
 {
     public class PlayerState
     {
