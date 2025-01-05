@@ -24,10 +24,13 @@ namespace Hx.PlayerStateMachine
             if (combo > maxCombo || Time.time - lastAttackTime >= attackWindow)
                 combo = 0;
 
-            player.animator.SetInteger("ComboCounter", combo);
-            stateTimer = .1f;
+            float attackDir = player.facingDir;
+            if (_xInput != 0) attackDir = _xInput;
             
-            player.SetVelocity(player.attackMovement[combo].x * player.facingDir, player.attackMovement[combo].y);
+            player.animator.SetInteger("ComboCounter", combo);
+            player.SetVelocity(player.attackMovement[combo].x * attackDir, player.attackMovement[combo].y);
+            
+            stateTimer = .1f;
             
             LogUtils.Log("Primary Attack Combo:" + combo);
         }
