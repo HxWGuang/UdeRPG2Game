@@ -13,6 +13,7 @@ namespace Hx.PlayerStateMachine
         public PlayerPrimaryAttackState(Player player, StateMachine stateMachine, string animBoolParaName) : base(
             player, stateMachine, animBoolParaName)
         {
+            stateName = "PrimaryAttack";
             attackWindow = player.ComboWindow;
             player.animationEventListener.RegisterAnimationCb("PrimaryAttackEnd", OnPrimaryAttackEnd);
         }

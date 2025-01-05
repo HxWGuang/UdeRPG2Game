@@ -33,9 +33,12 @@ namespace Hx
         [Header("Attack")] 
         public float ComboWindow = 1f;
 
-        [Space]
+        [Space] 
+        [Header("Debug")] 
+        public string curState;
         public int facingDir = 1;
         public bool facingRight = true;
+        // public bool isGrounded;
 
         #region Component
 
@@ -93,6 +96,7 @@ namespace Hx
 
         private void Update()
         {
+            // isGrounded = GroundedCheck();
             stateMachine.currentState.Update();
             CheckDashInput();
         }

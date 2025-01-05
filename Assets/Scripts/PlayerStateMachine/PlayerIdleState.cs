@@ -4,6 +4,7 @@
     {
         public PlayerIdleState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
+            stateName = "Idle";
         }
 
         public override void Enter()

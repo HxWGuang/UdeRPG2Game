@@ -6,6 +6,7 @@ namespace Hx.PlayerStateMachine
     {
         public PlayerJumpState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
+            stateName = "Jump";
         }
 
         public override void Enter()

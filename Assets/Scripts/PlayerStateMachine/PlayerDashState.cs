@@ -4,6 +4,7 @@
     {
         public PlayerDashState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
+            stateName = "Dash";
         }
 
         public override void Enter()

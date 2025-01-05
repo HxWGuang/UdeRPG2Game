@@ -6,6 +6,7 @@ namespace Hx.PlayerStateMachine
     {
         public PlayerWallSlideState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
+            stateName = "WallSlide";
         }
 
         public override void Enter()

@@ -4,6 +4,7 @@
     {
         public PlayerWallJumpState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
+            stateName = "wallJump";
         }
 
         public override void Enter()

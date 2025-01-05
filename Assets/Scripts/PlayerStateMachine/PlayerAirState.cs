@@ -4,6 +4,7 @@
     {
         public PlayerAirState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
+            stateName = "Air";
         }
 
         public override void Enter()
@@ -18,7 +19,7 @@
             player.animator.SetFloat("yVelocity", player.rb.velocity.y);
 
             if (_xInput != 0 && player.WallCheck()) stateMachine.ChangeState(player.wallSlideState);
-            if (player.rb.velocity.y <= 0 && player.GroundedCheck()) stateMachine.ChangeState(player.idleState);
+            if (player.rb.velocity.y <= EPS && player.GroundedCheck()) stateMachine.ChangeState(player.idleState);
         }
 
         public override void Exit()

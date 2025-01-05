@@ -4,6 +4,7 @@
     {
         public PlayerMoveState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
+            stateName = "Move";
         }
 
         public override void Enter()

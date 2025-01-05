@@ -7,6 +7,7 @@ namespace Hx.PlayerStateMachine
         public PlayerGroundedState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player,
             stateMachine, animBoolParaName)
         {
+            stateName = "Grounded";
         }
 
         public override void Enter()

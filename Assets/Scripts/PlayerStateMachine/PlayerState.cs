@@ -4,11 +4,13 @@ namespace Hx.PlayerStateMachine
 {
     public class PlayerState
     {
+        protected string stateName;
         public Player player { get; private set; }
         public StateMachine stateMachine { get; private set; }
         public string animBoolParaName { get; private set; }
         protected float stateTimer;
-
+        protected float EPS = 0.0001f;
+        
         protected float _xInput;
         protected float _yInput;
 
@@ -21,6 +23,7 @@ namespace Hx.PlayerStateMachine
 
         public virtual void Enter()
         {
+            player.curState = stateName;
             this.player.animator.SetBool(animBoolParaName, true);
             this.stateTimer = 0;
         }
