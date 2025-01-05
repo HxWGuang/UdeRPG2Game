@@ -300,12 +300,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d10448593ef414a83ee2718196b097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackMovement:
+  - {x: 3, y: 2}
+  - {x: 1, y: 2}
+  - {x: 4, y: 1}
+  isBusy: 0
   moveSpeed: 10
   jumpForce: 15
   dashSpeed: 25
   dashDuration: 0.2
   dashCD: 1
-  stateTimer: 0
   dashCDTimer: 0
   dashDir: 0
   groundCheckPos: {fileID: 814441420}
@@ -318,6 +322,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
+  ComboWindow: 1
   facingDir: 1
   facingRight: 1
 --- !u!50 &501584958
