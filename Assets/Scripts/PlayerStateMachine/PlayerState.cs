@@ -7,6 +7,7 @@ namespace Hx.PlayerStateMachine
         public Player player { get; private set; }
         public StateMachine stateMachine { get; private set; }
         public string animBoolParaName { get; private set; }
+        protected float stateTimer;
 
         protected float _xInput;
         protected float _yInput;
@@ -21,13 +22,14 @@ namespace Hx.PlayerStateMachine
         public virtual void Enter()
         {
             this.player.animator.SetBool(animBoolParaName, true);
+            this.stateTimer = 0;
         }
 
         public virtual void Update()
         {
             this._xInput = Input.GetAxisRaw("Horizontal");
             this._yInput = Input.GetAxisRaw("Vertical");
-            player.stateTimer -= Time.deltaTime;
+            this.stateTimer -= Time.deltaTime;
             player.dashCDTimer -= Time.deltaTime;
         }
 

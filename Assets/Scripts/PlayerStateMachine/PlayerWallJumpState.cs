@@ -9,7 +9,7 @@
         public override void Enter()
         {
             base.Enter();
-            player.stateTimer = .4f;
+            stateTimer = .4f;
             player.SetVelocity(5 * -player.facingDir, player.jumpForce);
         }
 
@@ -17,7 +17,7 @@
         {
             base.Update();
             
-            if (player.stateTimer < 0) 
+            if (stateTimer < 0) 
                 stateMachine.ChangeState(player.airState);
             
             if (player.GroundedCheck())

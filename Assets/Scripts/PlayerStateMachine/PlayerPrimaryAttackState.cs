@@ -20,17 +20,26 @@ namespace Hx.PlayerStateMachine
         public override void Enter()
         {
             base.Enter();
-
+            
             if (combo > maxCombo || Time.time - lastAttackTime >= attackWindow)
                 combo = 0;
 
             player.animator.SetInteger("ComboCounter", combo);
+            stateTimer = .1f;
+            
+            player.SetVelocity(player.attackMovement[combo].x * player.facingDir, player.attackMovement[combo].y);
+            
             LogUtils.Log("Primary Attack Combo:" + combo);
         }
 
         public override void Update()
         {
             base.Update();
+            
+            if (stateTimer < 0)
+            {
+                player.ZeroVelocity();
+            }
         }
 
         public override void Exit()
@@ -39,6 +48,8 @@ namespace Hx.PlayerStateMachine
 
             combo++;
             lastAttackTime = Time.time;
+            
+            player.StartCoroutine(nameof(player.BusyFor), .15f);
         }
 
         private void OnPrimaryAttackEnd()

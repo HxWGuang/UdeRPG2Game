@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Hx.PlayerStateMachine
+﻿namespace Hx.PlayerStateMachine
 {
     public class PlayerIdleState : PlayerGroundedState
     {
@@ -12,7 +10,7 @@ namespace Hx.PlayerStateMachine
         {
             base.Enter();
 
-            player.rb.velocity = new Vector2(0, 0);
+            player.ZeroVelocity();
         }
 
         public override void Update()
@@ -22,7 +20,7 @@ namespace Hx.PlayerStateMachine
             if (_xInput == player.facingDir && player.WallCheck())
                 return;
             
-            if (_xInput != 0)
+            if (_xInput != 0 && !player.isBusy)
                 stateMachine.ChangeState(player.moveState);
         }
 

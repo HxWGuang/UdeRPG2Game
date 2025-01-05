@@ -9,7 +9,7 @@
         public override void Enter()
         {
             base.Enter();
-            player.stateTimer = player.dashDuration;
+            stateTimer = player.dashDuration;
             player.dashCDTimer = player.dashCD;
         }
 
@@ -21,7 +21,7 @@
                 stateMachine.ChangeState(player.wallSlideState);
             
             this.player.SetVelocity(player.dashSpeed * player.dashDir, 0);
-            if (player.stateTimer <= 0) stateMachine.ChangeState(player.idleState);
+            if (stateTimer <= 0) stateMachine.ChangeState(player.idleState);
         }
 
         public override void Exit()

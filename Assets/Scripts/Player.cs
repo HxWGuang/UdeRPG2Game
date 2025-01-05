@@ -1,18 +1,23 @@
+using System.Collections;
 using Hx.PlayerStateMachine;
+using Hx.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Hx
 {
     public class Player : MonoBehaviour
     {
+        [Header("Attack Info")] 
+        public Vector2[] attackMovement;
+        
+        public bool isBusy = false;
+        
         [Header("Move Info")] public float moveSpeed = 10f;
         public float jumpForce = 12f;
 
         [Header("Dash Info")] public float dashSpeed = 25f;
         public float dashDuration = 0.2f;
         public float dashCD = 1f;
-        public float stateTimer;
         public float dashCDTimer;
         public float dashDir;
 
@@ -31,6 +36,38 @@ namespace Hx
         [Space]
         public int facingDir = 1;
         public bool facingRight = true;
+
+        #region Component
+
+        public Animator animator { get; private set; }
+
+        public Rigidbody2D rb { get; private set; }
+
+        public AnimationEventListener animationEventListener { get; private set; }
+
+        #endregion
+
+        #region State
+
+        public StateMachine stateMachine;
+
+        public PlayerIdleState idleState { get; private set; }
+
+        public PlayerMoveState moveState { get; private set; }
+
+        public PlayerJumpState jumpState { get; private set; }
+
+        public PlayerAirState airState { get; private set; }
+
+        public PlayerWallSlideState wallSlideState { get; private set; }
+
+        public PlayerDashState dashState { get; private set; }
+
+        public PlayerWallJumpState wallJumpState { get; private set; }
+
+        public PlayerPrimaryAttackState primaryAttackState { get; private set; }
+
+        #endregion
 
         private void Awake()
         {
@@ -60,13 +97,6 @@ namespace Hx
             CheckDashInput();
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(groundCheckPos.position, Vector2.down * groundCheckDis);
-            Gizmos.DrawRay(wallCheckPos.position, Vector3.right * facingDir * wallCheckDis);
-        }
-
         private void CheckDashInput()
         {
             if (WallCheck()) return;
@@ -79,11 +109,20 @@ namespace Hx
             }
         }
 
+        public IEnumerator BusyFor(float _seconds)
+        {
+            isBusy = true;
+            yield return new WaitForSeconds(_seconds);
+            isBusy = false;
+        }
+
         public void SetVelocity(float xInput, float yInput)
         {
             rb.velocity = new Vector2(xInput, yInput);
             FlipController(xInput);
         }
+
+        public void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
 
         private void FlipController(float _x)
         {
@@ -108,26 +147,11 @@ namespace Hx
             return Physics2D.Raycast(wallCheckPos.position, Vector3.right * facingDir, wallCheckDis, wallLayer);
         }
 
-        #region Component
-
-        public Animator animator { get; private set; }
-        public Rigidbody2D rb { get; private set; }
-        public AnimationEventListener animationEventListener { get; private set; }
-
-        #endregion
-
-        #region State
-
-        public StateMachine stateMachine;
-        public PlayerIdleState idleState { get; private set; }
-        public PlayerMoveState moveState { get; private set; }
-        public PlayerJumpState jumpState { get; private set; }
-        public PlayerAirState airState { get; private set; }
-        public PlayerWallSlideState wallSlideState { get; private set; }
-        public PlayerDashState dashState { get; private set; }
-        public PlayerWallJumpState wallJumpState { get; private set; }
-        public PlayerPrimaryAttackState primaryAttackState { get; private set; }
-
-        #endregion
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(groundCheckPos.position, Vector2.down * groundCheckDis);
+            Gizmos.DrawRay(wallCheckPos.position, Vector3.right * facingDir * wallCheckDis);
+        }
     }
 }
