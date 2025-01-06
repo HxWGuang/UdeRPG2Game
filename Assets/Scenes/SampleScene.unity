@@ -3916,7 +3916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502522208}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4181,7 +4181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 948196013}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4196,7 +4196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948196012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7684,7 +7684,7 @@ GameObject:
   - component: {fileID: 1692588023}
   - component: {fileID: 1692588025}
   - component: {fileID: 1692588024}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7862,7 +7862,7 @@ GameObject:
   - component: {fileID: 1901307754}
   - component: {fileID: 1901307753}
   - component: {fileID: 1901307756}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7958,6 +7958,12 @@ MonoBehaviour:
     m_Bits: 8
   facingDir: 1
   facingRight: 1
+  moveSpeed: 2
+  idleTime: 1.5
+  attackRange: 1.5
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &2022158826
 GameObject:
   m_ObjectHideFlags: 0

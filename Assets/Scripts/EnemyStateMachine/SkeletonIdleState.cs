@@ -1,18 +1,17 @@
 ﻿namespace Hx.EnemyStateMachine
 {
-    public class SkeletonIdleState : EnemyState
+    public class SkeletonIdleState : SkeletonGroundState
     {
-        public Skeleton enemy;
-        public SkeletonIdleState(Enemy enemyBase, StateMachine stateMachine, string animBoolName, Skeleton _enemy) : base(enemyBase, stateMachine, animBoolName)
+        public SkeletonIdleState(Enemy enemyBase, StateMachine stateMachine, string animBoolName, Skeleton _enemy) : base(enemyBase, stateMachine, animBoolName, _enemy)
         {
-            enemy = _enemy;
+            stateName = "Idle";
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            stateTimer = 2f;
+            stateTimer = enemy.idleTime;
         }
 
         public override void Update()

@@ -1,11 +1,10 @@
 ﻿namespace Hx.EnemyStateMachine
 {
-    public class SkeletonMoveState : EnemyState
+    public class SkeletonMoveState : SkeletonGroundState
     {
-        public Skeleton enemy;
-        public SkeletonMoveState(Enemy enemyBase, StateMachine stateMachine, string animBoolName, Skeleton _enemy) : base(enemyBase, stateMachine, animBoolName)
+        public SkeletonMoveState(Enemy enemyBase, StateMachine stateMachine, string animBoolName, Skeleton _enemy) : base(enemyBase, stateMachine, animBoolName, _enemy)
         {
-            enemy = _enemy;
+            stateName = "Move";
         }
 
         public override void Enter()
@@ -23,7 +22,7 @@
                 stateMachine.ChangeState(enemy.idleState);
             }
 
-            enemy.SetVelocity(2 * enemy.facingDir, enemy.rb.velocity.y);
+            enemy.SetVelocity(enemy.moveSpeed * enemy.facingDir, enemy.rb.velocity.y);
         }
 
         public override void Exit()
