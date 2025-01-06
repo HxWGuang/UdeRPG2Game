@@ -1,6 +1,5 @@
 using System.Collections;
 using Hx.PlayerStateMachine;
-using Hx.Utils;
 using UnityEngine;
 
 namespace Hx
