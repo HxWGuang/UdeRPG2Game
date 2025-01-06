@@ -22,6 +22,7 @@ namespace Hx.EnemyStateMachine
 
         public virtual void Enter()
         {
+            enemyBase.curState = stateName;
             enemyBase.animator.SetBool(animBoolName, true);
         }
 

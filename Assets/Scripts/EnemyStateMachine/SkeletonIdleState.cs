@@ -10,7 +10,6 @@
         public override void Enter()
         {
             base.Enter();
-
             stateTimer = enemy.idleTime;
         }
 

@@ -7,6 +7,7 @@
         public SkeletonIdleState idleState;
         public SkeletonMoveState moveState;
         public SkeletonBattleState battleState;
+        public SkeletonAttackState attackState;
         
         #endregion
         
@@ -17,6 +18,7 @@
             idleState = new SkeletonIdleState(this, stateMachine, "Idle", this);
             moveState = new SkeletonMoveState(this, stateMachine, "Move", this);
             battleState = new SkeletonBattleState(this, stateMachine, "Move", this);
+            attackState = new SkeletonAttackState(this, stateMachine, "Attack", this);
         }
 
         protected override void Start()

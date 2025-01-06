@@ -8,11 +8,17 @@ namespace Hx
         [Header("Move Info")] 
         public float moveSpeed;
         public float idleTime;
-        
-        [Header("Attack Info")]
-        public float attackRange;
 
-        public LayerMask PlayerLayer;
+        [Header("Attack Info")] 
+        public float playerCheckDis;
+        public float attackRange;
+        public float circleCheckRadius;
+        public float attackColdDown;
+        public float lastAttackTime;
+        public float battleTime;
+
+        [Header("Debug")] 
+        public string curState;
         
         public StateMachine stateMachine { get; private set; }
 
@@ -34,7 +40,13 @@ namespace Hx
             stateMachine.currentState?.Update();
         }
 
-        public virtual RaycastHit2D PlayerCheck() => Physics2D.Raycast(wallCheckPos.position, Vector2.right * facingDir, 50, LayerMask.GetMask("Player"));
+        public virtual bool PlayerCheck()
+        {
+            var res0 = Physics2D.Raycast(wallCheckPos.position, Vector2.right * facingDir, playerCheckDis,
+                LayerMask.GetMask("Player"));
+            var res1 = Physics2D.OverlapCircle(transform.position, circleCheckRadius, LayerMask.GetMask("Player"));
+            return res0 || (res1 != null);
+        }
 
         protected override void OnDrawGizmos()
         {
@@ -42,6 +54,7 @@ namespace Hx
             
             Gizmos.color = Color.yellow;
             Gizmos.DrawRay(transform.position, Vector2.right * facingDir * attackRange);
+            Gizmos.DrawWireSphere(transform.position, circleCheckRadius);
         }
     }
 }

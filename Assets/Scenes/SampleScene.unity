@@ -7684,6 +7684,7 @@ GameObject:
   - component: {fileID: 1692588023}
   - component: {fileID: 1692588025}
   - component: {fileID: 1692588024}
+  - component: {fileID: 1692588026}
   m_Layer: 7
   m_Name: Animator
   m_TagString: Untagged
@@ -7779,6 +7780,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1692588026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692588022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722c483332534121a7dd038af896832c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1702020040
 GameObject:
   m_ObjectHideFlags: 0
@@ -7862,6 +7875,7 @@ GameObject:
   - component: {fileID: 1901307754}
   - component: {fileID: 1901307753}
   - component: {fileID: 1901307756}
+  - component: {fileID: 1901307757}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -7925,7 +7939,7 @@ Transform:
   m_GameObject: {fileID: 1901307751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.8449836, y: 0.11128058, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1692588023}
@@ -7960,10 +7974,25 @@ MonoBehaviour:
   facingRight: 1
   moveSpeed: 2
   idleTime: 1.5
+  playerCheckDis: 10
   attackRange: 1.5
-  PlayerLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  circleCheckRadius: 1.7
+  attackColdDown: 0.5
+  lastAttackTime: 0
+  battleTime: 7
+  curState: 
+--- !u!114 &1901307757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901307751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd03b0a1a684ba49e1200782a33d7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2022158826
 GameObject:
   m_ObjectHideFlags: 0
