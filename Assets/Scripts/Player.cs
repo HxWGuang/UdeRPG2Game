@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hx
 {
-    public class Player : MonoBehaviour
+    public class Player : Entity
     {
         [Header("Attack Info")] 
         public Vector2[] attackMovement;
@@ -20,35 +20,14 @@ namespace Hx
         public float dashCDTimer;
         public float dashDir;
 
-        [Header("Collision Info")] 
-        [SerializeField] private Transform groundCheckPos;
-
-        [SerializeField] private float groundCheckDis;
-        [SerializeField] private LayerMask groundLayer;
-        [SerializeField] private Transform wallCheckPos;
-        [SerializeField] private float wallCheckDis;
-        [SerializeField] private LayerMask wallLayer;
-
         [Header("Attack")] 
         public float ComboWindow = 1f;
 
-        [Space] 
         [Header("Debug")] 
         public string curState;
-        public int facingDir = 1;
-        public bool facingRight = true;
+        
         // public bool isGrounded;
-
-        #region Component
-
-        public Animator animator { get; private set; }
-
-        public Rigidbody2D rb { get; private set; }
-
-        public AnimationEventListener animationEventListener { get; private set; }
-
-        #endregion
-
+        
         #region State
 
         public StateMachine stateMachine;
@@ -71,11 +50,9 @@ namespace Hx
 
         #endregion
 
-        private void Awake()
+        protected override void Awake()
         {
-            animator = GetComponentInChildren<Animator>();
-            rb = GetComponent<Rigidbody2D>();
-            animationEventListener = GetComponent<AnimationEventListener>();
+            base.Awake();
 
             stateMachine = new StateMachine();
             idleState = new PlayerIdleState(this, stateMachine, "Idle");
@@ -88,13 +65,17 @@ namespace Hx
             primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             stateMachine.Init(idleState);
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+            
             // isGrounded = GroundedCheck();
             stateMachine.currentState.Update();
             CheckDashInput();
@@ -117,44 +98,6 @@ namespace Hx
             isBusy = true;
             yield return new WaitForSeconds(_seconds);
             isBusy = false;
-        }
-
-        public void SetVelocity(float xInput, float yInput)
-        {
-            rb.velocity = new Vector2(xInput, yInput);
-            FlipController(xInput);
-        }
-
-        public void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
-
-        private void FlipController(float _x)
-        {
-            if (_x > 0 && !facingRight) Flip();
-            else if (_x < 0 && facingRight) Flip();
-        }
-
-        private void Flip()
-        {
-            facingDir *= -1;
-            facingRight = !facingRight;
-            transform.Rotate(0, 180, 0);
-        }
-
-        public bool GroundedCheck()
-        {
-            return Physics2D.Raycast(groundCheckPos.position, Vector2.down, groundCheckDis, groundLayer);
-        }
-
-        public bool WallCheck()
-        {
-            return Physics2D.Raycast(wallCheckPos.position, Vector3.right * facingDir, wallCheckDis, wallLayer);
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(groundCheckPos.position, Vector2.down * groundCheckDis);
-            Gizmos.DrawRay(wallCheckPos.position, Vector3.right * facingDir * wallCheckDis);
         }
     }
 }
