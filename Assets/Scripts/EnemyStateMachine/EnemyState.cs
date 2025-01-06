@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hx.EnemyStateMachine
@@ -7,7 +5,7 @@ namespace Hx.EnemyStateMachine
     public class EnemyState
     {
         public string stateName;
-        public Enemy enemy;
+        public Enemy enemyBase;
         public StateMachine stateMachine;
         public string animBoolName;
 
@@ -15,16 +13,16 @@ namespace Hx.EnemyStateMachine
         protected float EPS = 0.0001f;
 
 
-        public EnemyState(Enemy enemy, StateMachine stateMachine, string animBoolName)
+        public EnemyState(Enemy enemyBase, StateMachine stateMachine, string animBoolName)
         {
-            this.enemy = enemy;
+            this.enemyBase = enemyBase;
             this.stateMachine = stateMachine;
             this.animBoolName = animBoolName;
         }
 
         public virtual void Enter()
         {
-            
+            enemyBase.animator.SetBool(animBoolName, true);
         }
 
         public virtual void Update()
@@ -34,7 +32,7 @@ namespace Hx.EnemyStateMachine
 
         public virtual void Exit()
         {
-            
+            enemyBase.animator.SetBool(animBoolName, false);
         }
     }
 }

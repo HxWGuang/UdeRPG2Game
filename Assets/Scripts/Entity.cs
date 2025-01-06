@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
 
 namespace Hx
 {
-    public class Entity : MonoBehaviour
+    public abstract class Entity : MonoBehaviour
     {
-        
         [Header("Collision Info")] 
         [SerializeField] protected Transform groundCheckPos;
         [SerializeField] protected float groundCheckDis;
@@ -58,7 +56,7 @@ namespace Hx
             else if (_x < 0 && facingRight) Flip();
         }
 
-        protected virtual void Flip()
+        public virtual void Flip()
         {
             facingDir *= -1;
             facingRight = !facingRight;
