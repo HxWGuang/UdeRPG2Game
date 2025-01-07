@@ -15,10 +15,16 @@ namespace Hx.PlayerStateMachine
             player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpForce);
         }
 
-        public override void Update()
+        public override bool Update()
         {
-            base.Update();
-            if (player.rb.velocity.y != 0) stateMachine.ChangeState(player.airState);
+            if (base.Update()) return true;
+            if (player.rb.velocity.y != 0)
+            {
+                stateMachine.ChangeState(player.airState);
+                return true;
+            }
+            
+            return false;
         }
 
         public override void Exit()

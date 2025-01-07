@@ -20,11 +20,9 @@ namespace Hx.PlayerStateMachine
             player.SetZeroVelocity();
         }
 
-        public override void Update()
+        public override bool Update()
         {
-            base.Update();
-            
-            
+            if (base.Update()) return true;
             
             var colliders = Physics2D.OverlapCircleAll(player.attackCheckPoint.position, player.attackCheckRadius, LayerMask.GetMask("Enemy"));
             foreach (var collider in colliders)
@@ -40,7 +38,10 @@ namespace Hx.PlayerStateMachine
             if (stateTimer < 0)
             {
                 stateMachine.ChangeState(player.idleState);
+                return true;
             }
+
+            return false;
         }
 
         public override void Exit()

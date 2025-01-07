@@ -39,14 +39,16 @@ namespace Hx.PlayerStateMachine
             stateTimer = .1f;
         }
 
-        public override void Update()
+        public override bool Update()
         {
-            base.Update();
+            if (base.Update()) return true;
             
             if (stateTimer < 0)
             {
                 player.SetZeroVelocity();
             }
+            
+            return false;
         }
 
         public override void Exit()

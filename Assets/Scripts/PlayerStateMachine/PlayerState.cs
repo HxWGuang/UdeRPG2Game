@@ -27,13 +27,18 @@ namespace Hx.PlayerStateMachine
             this.player.animator.SetBool(animBoolParaName, true);
             this.stateTimer = 0;
         }
-
-        public virtual void Update()
+        
+        /// <summary>
+        /// 状态更新
+        /// </summary>
+        /// <returns>返回TURE表示当前状态已经终止（状态机转到了其他状态）不再往下执行后续代码，否则反之</returns>
+        public virtual bool Update()
         {
             this._xInput = Input.GetAxisRaw("Horizontal");
             this._yInput = Input.GetAxisRaw("Vertical");
             this.stateTimer -= Time.deltaTime;
             player.dashCDTimer -= Time.deltaTime;
+            return false;
         }
 
         public virtual void Exit()

@@ -14,15 +14,20 @@
             player.SetZeroVelocity();
         }
 
-        public override void Update()
+        public override bool Update()
         {
-            base.Update();
+            if (base.Update()) return true;
 
             if (_xInput == player.facingDir && player.WallCheck())
-                return;
-            
+                return false;
+
             if (_xInput != 0 && !player.isBusy)
+            {
                 stateMachine.ChangeState(player.moveState);
+                return true;
+            }
+
+            return false;
         }
 
         public override void Exit()

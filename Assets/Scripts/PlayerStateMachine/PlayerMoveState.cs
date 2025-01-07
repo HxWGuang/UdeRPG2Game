@@ -12,14 +12,19 @@
             base.Enter();
         }
 
-        public override void Update()
+        public override bool Update()
         {
-            base.Update();
+            if (base.Update()) return true;
             // move player
             player.SetVelocity(player.moveSpeed * _xInput, player.rb.velocity.y);
 
             if (_xInput == 0 || player.WallCheck())
+            {
                 stateMachine.ChangeState(player.idleState);
+                return true;
+            }
+            
+            return false;
         }
 
         public override void Exit()

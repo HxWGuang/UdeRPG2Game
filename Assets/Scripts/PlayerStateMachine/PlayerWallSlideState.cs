@@ -14,14 +14,14 @@ namespace Hx.PlayerStateMachine
             base.Enter();
         }
 
-        public override void Update()
+        public override bool Update()
         {
-            base.Update();
+            if (base.Update()) return true;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 stateMachine.ChangeState(player.wallJumpState);
-                return;
+                return true;
             }
             
             // 降低下滑的速度
@@ -31,10 +31,18 @@ namespace Hx.PlayerStateMachine
                 player.rb.velocity = new Vector2(0, player.rb.velocity.y * .7f);
 
             if (_xInput != 0 && _xInput != player.facingDir)
+            {
                 stateMachine.ChangeState(player.idleState);
+                return true;
+            }
 
             if (player.GroundedCheck())
+            {
                 stateMachine.ChangeState(player.idleState);
+                return true;
+            }
+            
+            return false;
         }
 
         public override void Exit()

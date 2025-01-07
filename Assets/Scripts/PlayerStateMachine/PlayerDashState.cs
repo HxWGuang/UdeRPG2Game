@@ -14,15 +14,24 @@
             player.dashCDTimer = player.dashCD;
         }
 
-        public override void Update()
+        public override bool Update()
         {
-            base.Update();
+            if (base.Update()) return true;
 
             if (player.WallCheck() && !player.GroundedCheck())
+            {
                 stateMachine.ChangeState(player.wallSlideState);
+                return true;
+            }
             
             this.player.SetVelocity(player.dashSpeed * player.dashDir, 0);
-            if (stateTimer <= 0) stateMachine.ChangeState(player.idleState);
+            if (stateTimer <= 0)
+            {
+                stateMachine.ChangeState(player.idleState);
+                return true;
+            }
+            
+            return false;
         }
 
         public override void Exit()
