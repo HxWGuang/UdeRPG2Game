@@ -1,5 +1,4 @@
-﻿using Hx.Utils;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Hx.PlayerStateMachine
 {
@@ -27,14 +26,17 @@ namespace Hx.PlayerStateMachine
                 combo = 0;
 
             float attackDir = player.facingDir;
-            if (_xInput != 0) attackDir = _xInput;
+            // 这里需要及时更新_xInput，否则_xInput可能会是上一帧的输入
+            _xInput = Input.GetAxisRaw("Horizontal");
+            if (_xInput != 0)
+            {
+                attackDir = _xInput;
+            }
             
             player.animator.SetInteger("ComboCounter", combo);
             player.SetVelocity(player.attackMovement[combo].x * attackDir, player.attackMovement[combo].y);
             
             stateTimer = .1f;
-            
-            LogUtils.Log("Primary Attack Combo:" + combo);
         }
 
         public override void Update()
