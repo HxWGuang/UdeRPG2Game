@@ -1,3 +1,4 @@
+using System.Collections;
 using Hx.Utils;
 using UnityEngine;
 
@@ -5,6 +6,11 @@ namespace Hx
 {
     public abstract class Entity : MonoBehaviour
     {
+        [Header("Knock back Info")] 
+        [SerializeField] private Vector2 knockbackForce;
+        [SerializeField] private float knockbackDuration;
+        private bool isKnocked;
+        
         [Header("Collision Info")] 
         [SerializeField] protected Transform groundCheckPos;
         [SerializeField] protected float groundCheckDis;
@@ -50,16 +56,30 @@ namespace Hx
         public virtual void DoDamage()
         {
             flashFx.PlayFlashFx();
+            StartCoroutine(nameof(DoKnockback));
             LogUtils.LogFormat("{0} was damaged!", gameObject.name);
+        }
+
+        private IEnumerator DoKnockback()
+        {
+            isKnocked = true;
+            rb.velocity = new Vector2(knockbackForce.x * -facingDir, knockbackForce.y);
+            yield return new WaitForSeconds(knockbackDuration);
+            isKnocked = false;
         }
         
         public virtual void SetVelocity(float xInput, float yInput)
         {
+            if (isKnocked) return;
             rb.velocity = new Vector2(xInput, yInput);
             FlipController(xInput);
         }
 
-        public virtual void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
+        public virtual void ZeroVelocity()
+        {
+            if (isKnocked) return;
+            rb.velocity = new Vector2(0, 0);
+        }
 
         protected virtual void FlipController(float _x)
         {

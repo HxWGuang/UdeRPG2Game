@@ -3850,6 +3850,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d10448593ef414a83ee2718196b097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackForce: {x: 0, y: 0}
+  knockbackDuration: 0
   groundCheckPos: {fileID: 814441420}
   groundCheckDis: 0.2
   groundLayer:
@@ -8012,6 +8014,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85cfa4f3be487bbd60d650f6b5014f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackForce: {x: 5, y: 3}
+  knockbackDuration: 0.1
   groundCheckPos: {fileID: 502522208}
   groundCheckDis: 0.1
   groundLayer:
