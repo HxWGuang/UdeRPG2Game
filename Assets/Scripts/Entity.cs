@@ -24,6 +24,7 @@ namespace Hx
         public Animator animator { get; private set; }
         public Rigidbody2D rb { get; private set; }
         public AnimationEventListener animationEventListener { get; private set; }
+        public ComponentHitFlashFx flashFx { get; private set; }
 
         #endregion
         
@@ -32,6 +33,7 @@ namespace Hx
             animator = GetComponentInChildren<Animator>();
             rb = GetComponent<Rigidbody2D>();
             animationEventListener = GetComponent<AnimationEventListener>();
+            flashFx = GetComponent<ComponentHitFlashFx>();
         }
 
         protected virtual void Start()
@@ -47,6 +49,7 @@ namespace Hx
 
         public virtual void DoDamage()
         {
+            flashFx.PlayFlashFx();
             LogUtils.LogFormat("{0} was damaged!", gameObject.name);
         }
         

@@ -7,7 +7,13 @@ namespace Hx.Utils
     public static class GameObjectExtensions
     {
         // public static T GetComponentInParent<T>(this Component component) where T : Component
-        // 从子级开始查找指定的Component，递归版本
+        /// <summary>
+        /// 从子级开始查找指定的Component，递归版本
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="maxDepth"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         [CanBeNull]
         public static T GetComponentInChildDirectlyRecursion<T>(this GameObject parent, int maxDepth = 10) where T : Component
         {
@@ -29,7 +35,13 @@ namespace Hx.Utils
             return null;
         }
 
-        // 从子级开始查找指定的Component，迭代版本
+        /// <summary>
+        /// 从子级开始查找指定的Component，迭代版本
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="maxDepth"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         [CanBeNull]
         public static T GetComponentInChildDirectly<T>(this GameObject parent, int maxDepth = 10) where T : Component
         {

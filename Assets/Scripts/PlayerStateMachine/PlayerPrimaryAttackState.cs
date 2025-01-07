@@ -54,6 +54,7 @@ namespace Hx.PlayerStateMachine
             combo++;
             lastAttackTime = Time.time;
             
+            // 攻击结束后进入Busy阻塞一段时间后再进入其他状态，制造停滞感
             player.StartCoroutine(nameof(player.BusyFor), .15f);
         }
 
