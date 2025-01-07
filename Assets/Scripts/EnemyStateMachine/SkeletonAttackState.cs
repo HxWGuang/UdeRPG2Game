@@ -11,6 +11,7 @@ namespace Hx.EnemyStateMachine
             stateName = "Attack";
             enemy = _enemy;
             enemy.animationEventListener.RegisterAnimationCb("SkeletonAttackEnd", OnAttackEnd);
+            enemy.animationEventListener.RegisterAnimationCb("AttackCheck", DoAttackCheck);
         }
 
         public override void Enter()
@@ -35,6 +36,15 @@ namespace Hx.EnemyStateMachine
         private void OnAttackEnd()
         {
             stateMachine.ChangeState(enemy.battleState);
+        }
+
+        private void DoAttackCheck()
+        {
+            var colliders = Physics2D.OverlapCircleAll(enemy.attackCheckPoint.position, enemy.attackCheckRadius, LayerMask.GetMask("Player"));
+            foreach (var collider in colliders)
+            {
+                collider.GetComponent<Player>().DoDamage();
+            }
         }
     }
 }

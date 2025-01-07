@@ -1,3 +1,4 @@
+using Hx.Utils;
 using UnityEngine;
 
 namespace Hx
@@ -11,6 +12,8 @@ namespace Hx
         [SerializeField] protected Transform wallCheckPos;
         [SerializeField] protected float wallCheckDis;
         [SerializeField] protected LayerMask wallLayer;
+        public Transform attackCheckPoint;
+        public float attackCheckRadius;
         
         [Space]
         public int facingDir = 1;
@@ -40,6 +43,11 @@ namespace Hx
         protected virtual void Update()
         {
 
+        }
+
+        public virtual void DoDamage()
+        {
+            LogUtils.LogFormat("{0} was damaged!", gameObject.name);
         }
         
         public virtual void SetVelocity(float xInput, float yInput)
@@ -75,9 +83,10 @@ namespace Hx
 
         protected virtual void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
             Gizmos.DrawRay(groundCheckPos.position, Vector2.down * groundCheckDis);
             Gizmos.DrawRay(wallCheckPos.position, Vector3.right * facingDir * wallCheckDis);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(attackCheckPoint.position, attackCheckRadius);
         }
     }
 }

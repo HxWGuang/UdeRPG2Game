@@ -16,6 +16,7 @@ namespace Hx.PlayerStateMachine
             stateName = "PrimaryAttack";
             attackWindow = player.ComboWindow;
             player.animationEventListener.RegisterAnimationCb("PrimaryAttackEnd", OnPrimaryAttackEnd);
+            player.animationEventListener.RegisterAnimationCb("AttackCheck", DoAttackCheck);
         }
 
         public override void Enter()
@@ -59,6 +60,15 @@ namespace Hx.PlayerStateMachine
         private void OnPrimaryAttackEnd()
         {
             stateMachine.ChangeState(player.idleState);
+        }
+
+        private void DoAttackCheck()
+        {
+            var colliders = Physics2D.OverlapCircleAll(player.attackCheckPoint.position, player.attackCheckRadius, LayerMask.GetMask("Enemy"));
+            foreach (var collider in colliders)
+            {
+                collider.GetComponent<Enemy>().DoDamage();
+            }
         }
     }
 }
