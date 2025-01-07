@@ -1,5 +1,4 @@
 using System.Collections;
-using Hx.Utils;
 using UnityEngine;
 
 namespace Hx
@@ -9,7 +8,7 @@ namespace Hx
         [Header("Knock back Info")] 
         [SerializeField] private Vector2 knockbackForce;
         [SerializeField] private float knockbackDuration;
-        private bool isKnocked;
+        private bool isKnocked = false;
         
         [Header("Collision Info")] 
         [SerializeField] protected Transform groundCheckPos;
@@ -57,7 +56,6 @@ namespace Hx
         {
             compFx.PlayFlashFx();
             StartCoroutine(nameof(DoKnockback));
-            LogUtils.LogFormat("{0} was damaged!", gameObject.name);
         }
 
         private IEnumerator DoKnockback()
@@ -75,7 +73,7 @@ namespace Hx
             FlipController(xInput);
         }
 
-        public virtual void ZeroVelocity()
+        public virtual void SetZeroVelocity()
         {
             if (isKnocked) return;
             rb.velocity = new Vector2(0, 0);

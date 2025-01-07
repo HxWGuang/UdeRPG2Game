@@ -12,7 +12,7 @@ namespace Hx
         [SerializeField] private Material flashMaterial;
         [SerializeField] private float flashDuration;
         [SerializeField] private float flashIntensity;
-        public Color blinkColor;
+        [HideInInspector] public Color blinkColor;
         private Material originalMaterial;
         private Color originalColor;
         private Renderer renderer;

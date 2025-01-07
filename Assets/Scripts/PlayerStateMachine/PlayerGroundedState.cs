@@ -19,6 +19,12 @@ namespace Hx.PlayerStateMachine
         {
             base.Update();
 
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                stateMachine.ChangeState(player.counterAttackState);
+                return;
+            }
+
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 stateMachine.ChangeState(player.primaryAttackState);

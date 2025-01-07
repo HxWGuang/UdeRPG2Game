@@ -20,6 +20,8 @@ namespace Hx
         public float attackColdDown;
         public float lastAttackTime;
         public float battleTime;
+        [SerializeField] protected Renderer counterImage;
+        protected bool canBeStunned;
 
         [Header("Debug")] 
         public string curState;
@@ -50,6 +52,22 @@ namespace Hx
                 LayerMask.GetMask("Player"));
             var res1 = Physics2D.OverlapCircle(transform.position, circleCheckRadius, LayerMask.GetMask("Player"));
             return res0 || (res1 != null);
+        }
+
+        public virtual bool CheckAndDoStunnedBeforeAttack()
+        {
+            if (canBeStunned)
+            {
+                SetCounterWindow(false);
+                return true;
+            }
+            return false;
+        }
+
+        public void SetCounterWindow(bool isOpen)
+        {
+            canBeStunned = isOpen;
+            counterImage.enabled = isOpen;
         }
 
         protected override void OnDrawGizmos()

@@ -36,7 +36,6 @@ namespace Hx.EnemyStateMachine
         {
             base.Exit();
             
-            // enemy.compFx.CancelInvoke("Blink");
             enemy.compFx.Invoke("StopBlink", 0);
         }
     }

@@ -4,7 +4,7 @@ namespace Hx.PlayerStateMachine
 {
     public class PlayerState
     {
-        protected string stateName;
+        public string stateName;
         public Player player { get; private set; }
         public StateMachine stateMachine { get; private set; }
         public string animBoolParaName { get; private set; }

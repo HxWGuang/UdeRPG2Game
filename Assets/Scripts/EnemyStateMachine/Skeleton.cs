@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Hx.EnemyStateMachine
+﻿namespace Hx.EnemyStateMachine
 {
     public class Skeleton : Enemy
     {
@@ -35,8 +33,16 @@ namespace Hx.EnemyStateMachine
         protected override void Update()
         {
             base.Update();
-            
-            if (Input.GetKeyDown(KeyCode.U)) stateMachine.ChangeState(stunnedState);
+        }
+
+        public override bool CheckAndDoStunnedBeforeAttack()
+        {
+            if (base.CheckAndDoStunnedBeforeAttack())
+            {
+                stateMachine.ChangeState(stunnedState);
+                return true;
+            }
+            return false;
         }
     }
 }

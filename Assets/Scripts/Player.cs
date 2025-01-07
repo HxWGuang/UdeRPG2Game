@@ -21,7 +21,8 @@ namespace Hx
         public float dashDir;
 
         [Header("Attack")] 
-        public float ComboWindow = 1f;
+        public float comboWindow = 1f;
+        public float counterAttackWindow = 0.5f;
 
         [Header("Debug")] 
         public string curState;
@@ -47,6 +48,7 @@ namespace Hx
         public PlayerWallJumpState wallJumpState { get; private set; }
 
         public PlayerPrimaryAttackState primaryAttackState { get; private set; }
+        public PlayerCounterAttackState counterAttackState { get; private set; }
 
         #endregion
 
@@ -63,6 +65,7 @@ namespace Hx
             dashState = new PlayerDashState(this, stateMachine, "Dash");
             wallJumpState = new PlayerWallJumpState(this, stateMachine, "WallJump");
             primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
+            counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
         }
 
         protected override void Start()
@@ -75,6 +78,8 @@ namespace Hx
         protected override void Update()
         {
             base.Update();
+            
+            // Debug.Log(stateMachine.currentState.stateName + "  " + rb.velocity.x);
             
             // isGrounded = GroundedCheck();
             stateMachine.currentState.Update();

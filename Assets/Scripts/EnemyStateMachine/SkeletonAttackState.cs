@@ -12,13 +12,15 @@ namespace Hx.EnemyStateMachine
             enemy = _enemy;
             enemy.animationEventListener.RegisterAnimationCb("SkeletonAttackEnd", OnAttackEnd);
             enemy.animationEventListener.RegisterAnimationCb("AttackCheck", DoAttackCheck);
+            enemy.animationEventListener.RegisterAnimationCb("CounterWindowOpen", () => enemy.SetCounterWindow(true));
+            enemy.animationEventListener.RegisterAnimationCb("CounterWindowClose", () => enemy.SetCounterWindow(false));
         }
 
         public override void Enter()
         {
             base.Enter();
             
-            enemy.ZeroVelocity();
+            enemy.SetZeroVelocity();
         }
 
         public override void Update()

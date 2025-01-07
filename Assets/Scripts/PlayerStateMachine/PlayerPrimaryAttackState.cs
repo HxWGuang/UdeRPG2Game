@@ -13,7 +13,7 @@ namespace Hx.PlayerStateMachine
             player, stateMachine, animBoolParaName)
         {
             stateName = "PrimaryAttack";
-            attackWindow = player.ComboWindow;
+            attackWindow = player.comboWindow;
             player.animationEventListener.RegisterAnimationCb("PrimaryAttackEnd", OnPrimaryAttackEnd);
             player.animationEventListener.RegisterAnimationCb("AttackCheck", DoAttackCheck);
         }
@@ -45,7 +45,7 @@ namespace Hx.PlayerStateMachine
             
             if (stateTimer < 0)
             {
-                player.ZeroVelocity();
+                player.SetZeroVelocity();
             }
         }
 
@@ -70,7 +70,9 @@ namespace Hx.PlayerStateMachine
             var colliders = Physics2D.OverlapCircleAll(player.attackCheckPoint.position, player.attackCheckRadius, LayerMask.GetMask("Enemy"));
             foreach (var collider in colliders)
             {
-                collider.GetComponent<Enemy>().DoDamage();
+                var enemyScript = collider.GetComponent<Enemy>();
+                enemyScript.DoDamage();
+                // enemyScript.CheckAndDoStunnedBeforeAttack();
             }
         }
     }
