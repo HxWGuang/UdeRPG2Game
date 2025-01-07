@@ -3928,6 +3928,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: f9b1c5ee4e32499409025d0ae5f1213d, type: 2}
   flashDuration: 0.2
   flashIntensity: 1
+  blinkColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &502522207
 GameObject:
   m_ObjectHideFlags: 0
@@ -4323,7 +4324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8a752a5dc473e4399da1b6ab8f7473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxSpeed: 0.9
+  parallaxSpeed: 1
 --- !u!1 &1089223411
 GameObject:
   m_ObjectHideFlags: 0
@@ -7448,7 +7449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8a752a5dc473e4399da1b6ab8f7473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxSpeed: 1
+  parallaxSpeed: 0.9
 --- !u!1 &1172205845
 GameObject:
   m_ObjectHideFlags: 0
@@ -8030,6 +8031,8 @@ MonoBehaviour:
   attackCheckRadius: 1.1
   facingDir: 1
   facingRight: 1
+  stunDuration: 1
+  stunDir: {x: 5, y: 3}
   moveSpeed: 2
   idleTime: 1.5
   playerCheckDis: 10
@@ -8066,6 +8069,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: f9b1c5ee4e32499409025d0ae5f1213d, type: 2}
   flashDuration: 0.2
   flashIntensity: 0
+  blinkColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2022158826
 GameObject:
   m_ObjectHideFlags: 0

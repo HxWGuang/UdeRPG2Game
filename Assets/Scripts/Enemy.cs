@@ -5,6 +5,10 @@ namespace Hx
 {
     public abstract class Enemy : Entity
     {
+        [Header("Stun Info")]
+        public float stunDuration;
+        public Vector2 stunDir;
+        
         [Header("Move Info")] 
         public float moveSpeed;
         public float idleTime;

@@ -1,4 +1,6 @@
-﻿namespace Hx.EnemyStateMachine
+﻿using UnityEngine;
+
+namespace Hx.EnemyStateMachine
 {
     public class Skeleton : Enemy
     {
@@ -8,6 +10,7 @@
         public SkeletonMoveState moveState;
         public SkeletonBattleState battleState;
         public SkeletonAttackState attackState;
+        public SkeletonStunnedState stunnedState;
         
         #endregion
         
@@ -19,6 +22,7 @@
             moveState = new SkeletonMoveState(this, stateMachine, "Move", this);
             battleState = new SkeletonBattleState(this, stateMachine, "Move", this);
             attackState = new SkeletonAttackState(this, stateMachine, "Attack", this);
+            stunnedState = new SkeletonStunnedState(this, stateMachine, "Stunned", this);
         }
 
         protected override void Start()
@@ -31,6 +35,8 @@
         protected override void Update()
         {
             base.Update();
+            
+            if (Input.GetKeyDown(KeyCode.U)) stateMachine.ChangeState(stunnedState);
         }
     }
 }
