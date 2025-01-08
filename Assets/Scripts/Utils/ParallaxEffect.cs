@@ -3,7 +3,7 @@ using UnityEngine;
 public class ParallaxEffect : MonoBehaviour
 {
     private Camera cam;
-    [SerializeField]
+    [SerializeField][Range(0,1)]
     private float parallaxSpeed;
     private float xPos;
 
@@ -19,18 +19,17 @@ public class ParallaxEffect : MonoBehaviour
     
     void Update()
     {
-        // 摄像机与背景移动过程中距离的差值
-        var distanceDelta = cam.transform.position.x * (1 - parallaxSpeed);
         var distanceToMove = cam.transform.position.x * parallaxSpeed;
+        // 将目标位置设置为摄像机位置加上距离
         transform.position = new Vector3(xPos + distanceToMove, transform.position.y);
-
+        
+        // 计算相机位置与视差速度之间的距离差
+        var distanceDelta = cam.transform.position.x * (1 - parallaxSpeed);
+        // 如果距离差大于xPos加上边界值，则将xPos设置为xPos加上边界值
         if (distanceDelta > xPos + boundsX)
-        {
             xPos = xPos + boundsX;
-        }
+        // 如果距离差小于xPos减去边界值，则将xPos设置为xPos减去边界值
         else if (distanceDelta < xPos - boundsX)
-        {
             xPos = xPos - boundsX;
-        }
     }
 }

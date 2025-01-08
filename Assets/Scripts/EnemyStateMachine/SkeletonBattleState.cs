@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Hx.Module;
+using UnityEngine;
 
 namespace Hx.EnemyStateMachine
 {
@@ -18,7 +19,7 @@ namespace Hx.EnemyStateMachine
         {
             base.Enter();
             stateTimer = enemy.battleTime;
-            player = GameObject.Find("Player").transform;
+            player = PlayerManager.instance.player.transform;
         }
 
         public override void Update()

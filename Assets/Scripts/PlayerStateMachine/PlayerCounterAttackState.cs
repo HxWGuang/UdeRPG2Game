@@ -7,7 +7,7 @@ namespace Hx.PlayerStateMachine
         public PlayerCounterAttackState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
             stateName = "CounterAttack";
-            player.animationEventListener.RegisterAnimationCb("SuccessCounterAttackEnd", OnSuccessCounterAttackAnimEnd);
+            player.compAnimEventListener.RegisterAnimationCb("SuccessCounterAttackEnd", OnSuccessCounterAttackAnimEnd);
         }
 
         public override void Enter()

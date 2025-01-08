@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hx
 {
-    public class AnimationEventDispatcher : MonoBehaviour
+    public class ComponentAnimEventDispatcher : MonoBehaviour
     {
         public Dictionary<string, Action> NormalEventDict = new Dictionary<string, Action>();
 

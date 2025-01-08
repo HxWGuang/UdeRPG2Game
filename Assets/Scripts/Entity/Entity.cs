@@ -28,7 +28,7 @@ namespace Hx
 
         public Animator animator { get; private set; }
         public Rigidbody2D rb { get; private set; }
-        public AnimationEventListener animationEventListener { get; private set; }
+        public ComponentAnimEventListener compAnimEventListener { get; private set; }
         public ComponentEntityFx compFx { get; private set; }
 
         #endregion
@@ -37,7 +37,7 @@ namespace Hx
         {
             animator = GetComponentInChildren<Animator>();
             rb = GetComponent<Rigidbody2D>();
-            animationEventListener = GetComponent<AnimationEventListener>();
+            compAnimEventListener = GetComponent<ComponentAnimEventListener>();
             compFx = GetComponent<ComponentEntityFx>();
         }
 

@@ -14,8 +14,8 @@ namespace Hx.PlayerStateMachine
         {
             stateName = "PrimaryAttack";
             attackWindow = player.comboWindow;
-            player.animationEventListener.RegisterAnimationCb("PrimaryAttackEnd", OnPrimaryAttackEnd);
-            player.animationEventListener.RegisterAnimationCb("AttackCheck", DoAttackCheck);
+            player.compAnimEventListener.RegisterAnimationCb("PrimaryAttackEnd", OnPrimaryAttackEnd);
+            player.compAnimEventListener.RegisterAnimationCb("AttackCheck", DoAttackCheck);
         }
 
         public override void Enter()

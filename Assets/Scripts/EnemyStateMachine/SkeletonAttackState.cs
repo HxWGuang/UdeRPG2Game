@@ -10,10 +10,10 @@ namespace Hx.EnemyStateMachine
         {
             stateName = "Attack";
             enemy = _enemy;
-            enemy.animationEventListener.RegisterAnimationCb("SkeletonAttackEnd", OnAttackEnd);
-            enemy.animationEventListener.RegisterAnimationCb("AttackCheck", DoAttackCheck);
-            enemy.animationEventListener.RegisterAnimationCb("CounterWindowOpen", () => enemy.SetCounterWindow(true));
-            enemy.animationEventListener.RegisterAnimationCb("CounterWindowClose", () => enemy.SetCounterWindow(false));
+            enemy.compAnimEventListener.RegisterAnimationCb("SkeletonAttackEnd", OnAttackEnd);
+            enemy.compAnimEventListener.RegisterAnimationCb("AttackCheck", DoAttackCheck);
+            enemy.compAnimEventListener.RegisterAnimationCb("CounterWindowOpen", () => enemy.SetCounterWindow(true));
+            enemy.compAnimEventListener.RegisterAnimationCb("CounterWindowClose", () => enemy.SetCounterWindow(false));
         }
 
         public override void Enter()

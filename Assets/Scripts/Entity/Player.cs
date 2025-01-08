@@ -1,4 +1,5 @@
 using System.Collections;
+using Hx.Module;
 using Hx.PlayerStateMachine;
 using UnityEngine;
 
@@ -71,6 +72,7 @@ namespace Hx
         protected override void Start()
         {
             base.Start();
+            PlayerManager.instance.player = this;
             
             stateMachine.Init(idleState);
         }

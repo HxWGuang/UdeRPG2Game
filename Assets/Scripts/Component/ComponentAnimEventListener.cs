@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace Hx
 {
-    public class AnimationEventListener : MonoBehaviour
+    public class ComponentAnimEventListener : MonoBehaviour
     {
-        private AnimationEventDispatcher _dispatcher;
+        private ComponentAnimEventDispatcher _dispatcher;
 
-        private AnimationEventDispatcher dispatcher
+        private ComponentAnimEventDispatcher dispatcher
         {
             get
             {
-                if (!_dispatcher) _dispatcher = GetComponentInChildren<AnimationEventDispatcher>();
+                if (!_dispatcher) _dispatcher = GetComponentInChildren<ComponentAnimEventDispatcher>();
                 return _dispatcher;
             }
         }
