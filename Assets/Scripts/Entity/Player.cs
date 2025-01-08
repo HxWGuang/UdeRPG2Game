@@ -82,9 +82,9 @@ namespace Hx
         {
             if (WallCheck()) return;
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dash.CheckCanUse())
+            if (Input.GetKeyDown(KeyCode.LeftShift) && G.skillMgr.dash.CheckCanUse())
             {
-                SkillManager.instance.dash.UseSkill();
+                G.skillMgr.dash.UseSkill();
                 dashDir = Input.GetAxisRaw("Horizontal");
                 if (dashDir == 0) dashDir = facingDir;
                 stateMachine.ChangeState(dashState);

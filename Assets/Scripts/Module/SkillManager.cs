@@ -11,6 +11,7 @@ namespace Hx.Module
         //     );
         
         [HideInInspector] public SkillDash dash;
+        [HideInInspector] public SkillClone clone;
 
         private void Awake()
         {
@@ -18,6 +19,7 @@ namespace Hx.Module
             else instance = this;
             
             dash = GetComponent<SkillDash>();
+            clone = GetComponent<SkillClone>();
         }
     }
 }

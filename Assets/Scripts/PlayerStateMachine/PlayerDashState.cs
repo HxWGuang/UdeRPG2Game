@@ -1,4 +1,6 @@
-﻿namespace Hx.PlayerStateMachine
+﻿using Hx.Module;
+
+namespace Hx.PlayerStateMachine
 {
     public class PlayerDashState : PlayerState
     {
@@ -11,6 +13,8 @@
         {
             base.Enter();
             stateTimer = player.dashDuration;
+            
+            G.skillMgr.clone.UseSkill();
         }
 
         public override bool Update()

@@ -15,15 +15,15 @@ namespace Hx
         [HideInInspector] public Color blinkColor;
         private Material originalMaterial;
         private Color originalColor;
-        private Renderer renderer;
+        private Renderer fxRenderer;
 
         private void Start()
         {
-            renderer = gameObject.GetComponentInChildDirectly<Renderer>();
-            if (renderer != null)
+            fxRenderer = gameObject.GetComponentInChildDirectly<Renderer>();
+            if (fxRenderer != null)
             {
-                originalMaterial = renderer.material;
-                originalColor = renderer.material.color;
+                originalMaterial = fxRenderer.material;
+                originalColor = fxRenderer.material.color;
             }
         }
 
@@ -34,27 +34,27 @@ namespace Hx
 
         private IEnumerator DoFlash()
         {
-            renderer.material = flashMaterial;
+            fxRenderer.material = flashMaterial;
             yield return new WaitForSeconds(flashDuration);
-            renderer.material = originalMaterial;
+            fxRenderer.material = originalMaterial;
         }
 
         private void Blink()
         {
-            if (renderer.material.color != blinkColor)
+            if (fxRenderer.material.color != blinkColor)
             {
-                renderer.material.color = blinkColor;
-            } else if (renderer.material.color == blinkColor)
+                fxRenderer.material.color = blinkColor;
+            } else if (fxRenderer.material.color == blinkColor)
             {
-                renderer.material.color = originalColor;
+                fxRenderer.material.color = originalColor;
             }
         }
 
         private void StopBlink()
         {
             CancelInvoke("Blink");
-            renderer.material = originalMaterial;
-            renderer.material.color = originalColor;
+            fxRenderer.material = originalMaterial;
+            fxRenderer.material.color = originalColor;
         }
     }
 }

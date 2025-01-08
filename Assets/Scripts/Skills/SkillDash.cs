@@ -9,6 +9,8 @@ namespace Hx.Skill
             base.UseSkill();
             
             LogUtils.Log("Use Dash Skill");
+            
+            cooldownTimer = cooldown;
         }
     }
 }
