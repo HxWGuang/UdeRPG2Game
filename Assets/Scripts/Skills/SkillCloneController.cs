@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Hx.Module;
+using UnityEngine;
 
 namespace Hx.Skill
 {
@@ -12,9 +13,13 @@ namespace Hx.Skill
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        private void OnEnable()
+        {
             transitionTimer = transitionDuration;
         }
-        
+
         private void Update()
         {
             // 在transitionDuration时间内完成颜色到透明的插值
@@ -26,7 +31,7 @@ namespace Hx.Skill
             }
             else
             {
-                Destroy(gameObject);
+                G.skillMgr.clone.objectPool.Return(gameObject);
             }
         }
     }
