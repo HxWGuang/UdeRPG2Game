@@ -54,7 +54,7 @@ namespace Hx
             airState = new PlayerAirState(this, stateMachine, "Jump");
             wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
             dashState = new PlayerDashState(this, stateMachine, "Dash");
-            wallJumpState = new PlayerWallJumpState(this, stateMachine, "WallJump");
+            wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
             primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
             counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
         }
