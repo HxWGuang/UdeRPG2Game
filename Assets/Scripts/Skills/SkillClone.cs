@@ -11,7 +11,6 @@ namespace Hx.Skill
         {
             base.UseSkill();
             var clone = Instantiate(_clonePrefab, G.player.transform.position, G.player.transform.rotation);
-            // clone.GetComponent<Clone>().SetOwner(transform);
         }
     }
 }
