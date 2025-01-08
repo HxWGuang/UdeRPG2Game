@@ -12,5 +12,7 @@
 /dataSources/
 /dataSources.local.xml
 
-# 忽略chat的cache
+# 忽略插件的cache
 /CopilotChatHistory.xml
+/git_toolbox_blame.xml
+/git_toolbox_prj.xml
