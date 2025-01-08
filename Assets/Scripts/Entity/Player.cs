@@ -17,8 +17,6 @@ namespace Hx
 
         [Header("Dash Info")] public float dashSpeed = 25f;
         public float dashDuration = 0.2f;
-        public float dashCD = 1f;
-        public float dashCDTimer;
         public float dashDir;
 
         [Header("Attack")] 
@@ -33,21 +31,13 @@ namespace Hx
         #region State
 
         public StateMachine stateMachine;
-
         public PlayerIdleState idleState { get; private set; }
-
         public PlayerMoveState moveState { get; private set; }
-
         public PlayerJumpState jumpState { get; private set; }
-
         public PlayerAirState airState { get; private set; }
-
         public PlayerWallSlideState wallSlideState { get; private set; }
-
         public PlayerDashState dashState { get; private set; }
-
         public PlayerWallJumpState wallJumpState { get; private set; }
-
         public PlayerPrimaryAttackState primaryAttackState { get; private set; }
         public PlayerCounterAttackState counterAttackState { get; private set; }
 
@@ -92,8 +82,9 @@ namespace Hx
         {
             if (WallCheck()) return;
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && dashCDTimer <= 0)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dash.CheckCanUse())
             {
+                SkillManager.instance.dash.UseSkill();
                 dashDir = Input.GetAxisRaw("Horizontal");
                 if (dashDir == 0) dashDir = facingDir;
                 stateMachine.ChangeState(dashState);

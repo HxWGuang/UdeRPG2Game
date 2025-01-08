@@ -3959,8 +3959,6 @@ MonoBehaviour:
   jumpForce: 15
   dashSpeed: 25
   dashDuration: 0.2
-  dashCD: 1
-  dashCDTimer: 0
   dashDir: 0
   comboWindow: 1
   counterAttackWindow: 0.3
@@ -7490,6 +7488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1159449770}
   - component: {fileID: 1159449769}
+  - component: {fileID: 1159449771}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -7509,6 +7508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ecb658f2f5f46f4a7679a9c512bb9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dash: {fileID: 0}
 --- !u!4 &1159449770
 Transform:
   m_ObjectHideFlags: 0
@@ -7524,6 +7524,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1159449771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159449768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183631324cd944fea0a3c8f15227dd83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
 --- !u!1 &1169697059
 GameObject:
   m_ObjectHideFlags: 0

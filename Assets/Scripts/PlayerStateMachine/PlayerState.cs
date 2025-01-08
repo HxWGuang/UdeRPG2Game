@@ -37,7 +37,6 @@ namespace Hx.PlayerStateMachine
             this._xInput = Input.GetAxisRaw("Horizontal");
             this._yInput = Input.GetAxisRaw("Vertical");
             this.stateTimer -= Time.deltaTime;
-            player.dashCDTimer -= Time.deltaTime;
             return false;
         }
 

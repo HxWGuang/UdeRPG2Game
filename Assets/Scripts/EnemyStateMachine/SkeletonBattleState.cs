@@ -26,13 +26,16 @@ namespace Hx.EnemyStateMachine
         {
             base.Update();
 
-            if (player.position.x > enemy.transform.position.x)
-                moveDir = 1;
-            else if (player.position.x < enemy.transform.position.x)
-                moveDir = -1;
+            if (Vector2.Distance(enemy.transform.position, player.position) > enemy.attackRange)
+            {
+                // 向玩家方向移动
+                if (player.position.x > enemy.transform.position.x)
+                    moveDir = 1;
+                else if (player.position.x < enemy.transform.position.x)
+                    moveDir = -1;
+                enemy.SetVelocity(enemy.moveSpeed * moveDir, enemy.rb.velocity.y);
+            }
             
-            enemy.SetVelocity(enemy.moveSpeed * moveDir, enemy.rb.velocity.y);
-
             var res = enemy.PlayerCheck();
             if (res)
             {
@@ -47,6 +50,7 @@ namespace Hx.EnemyStateMachine
             }
             else
             {
+                // 超时或距离过远就回到Idle
                 if (stateTimer < 0 || Vector2.Distance(enemy.transform.position, player.position) > enemy.playerCheckDis)
                 {
                     stateMachine.ChangeState(enemy.idleState);

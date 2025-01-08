@@ -11,7 +11,6 @@
         {
             base.Enter();
             stateTimer = player.dashDuration;
-            player.dashCDTimer = player.dashCD;
         }
 
         public override bool Update()

@@ -53,6 +53,7 @@ namespace Hx
         private void StopBlink()
         {
             CancelInvoke("Blink");
+            renderer.material = originalMaterial;
             renderer.material.color = originalColor;
         }
     }
