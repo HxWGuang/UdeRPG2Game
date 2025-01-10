@@ -1,11 +1,11 @@
 ﻿using Hx.Skill;
 using UnityEngine;
 
-namespace Hx.Module
+namespace Hx.Component
 {
-    public class SkillManager : MonoBehaviour
+    public class ComponentSkillManager : MonoBehaviour
     {
-        public static SkillManager instance;
+        // public static ComponentSkillManager instance;
         // public Dictionary<string, SkillBase> skills = new Dictionary<string, SkillBase>(
         //     ["DashSkill", SkillDash]
         //     );
@@ -15,8 +15,8 @@ namespace Hx.Module
 
         private void Awake()
         {
-            if (instance != null) Destroy(gameObject);
-            else instance = this;
+            // if (instance != null) Destroy(gameObject);
+            // else instance = this;
             
             dash = GetComponent<SkillDash>();
             clone = GetComponent<SkillClone>();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Hx
+namespace Hx.Component
 {
     public class ComponentAnimEventDispatcher : MonoBehaviour
     {

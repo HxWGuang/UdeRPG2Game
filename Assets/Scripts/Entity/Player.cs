@@ -1,6 +1,8 @@
 using System.Collections;
+using Hx.Component;
 using Hx.Module;
 using Hx.PlayerStateMachine;
+using Hx.Utils;
 using UnityEngine;
 
 namespace Hx
@@ -27,8 +29,14 @@ namespace Hx
         public string curState;
         
         // public bool isGrounded;
+
+        #region Components
+
+        public ComponentSkillManager compSkillMgr { get; private set; }
         
-        #region State
+        #endregion
+        
+        #region States
 
         public StateMachine stateMachine;
         public PlayerIdleState idleState { get; private set; }
@@ -46,6 +54,8 @@ namespace Hx
         protected override void Awake()
         {
             base.Awake();
+
+            compSkillMgr = gameObject.GetComponentInChildDirectly<ComponentSkillManager>();
 
             stateMachine = new StateMachine();
             idleState = new PlayerIdleState(this, stateMachine, "Idle");
@@ -82,9 +92,9 @@ namespace Hx
         {
             if (WallCheck()) return;
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && G.skillMgr.dash.CheckCanUse())
+            if (Input.GetKeyDown(KeyCode.LeftShift) && compSkillMgr.dash.CheckCanUse())
             {
-                G.skillMgr.dash.UseSkill();
+                compSkillMgr.dash.UseSkill();
                 dashDir = Input.GetAxisRaw("Horizontal");
                 if (dashDir == 0) dashDir = facingDir;
                 stateMachine.ChangeState(dashState);

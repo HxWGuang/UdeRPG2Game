@@ -1,4 +1,5 @@
-﻿using Hx.Module;
+﻿using Hx.Component;
+using Hx.Module;
 using UnityEngine;
 
 namespace Hx.Skill
@@ -9,7 +10,6 @@ namespace Hx.Skill
         [SerializeField] private Color targetColor = Color.clear;
         [SerializeField] private Transform attackPoint;
         [SerializeField] private float attackRange;
-        [SerializeField] private AnimationClip[] attackClips;
         
         private Color originColor;
         private Animator animator;
@@ -75,7 +75,7 @@ namespace Hx.Skill
                 // }    // transform.LookAt(closestEnemy);
                 
                 // 随机播放一个攻击
-                var randomAttack = Random.Range(1, attackClips.Length);
+                var randomAttack = Random.Range(1, 4);
                 Debug.Log("Random Attack: " + randomAttack);
                 animator.SetInteger("AttackNum", randomAttack);
             }
@@ -94,7 +94,7 @@ namespace Hx.Skill
                 }
                 else
                 {
-                    G.skillMgr.clone.objectPool.Return(gameObject);
+                    G.player.compSkillMgr.clone.objectPool.Return(gameObject);
                 }
             }
         }

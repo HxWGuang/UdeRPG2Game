@@ -2,7 +2,7 @@
 using Hx.Utils;
 using UnityEngine;
 
-namespace Hx
+namespace Hx.Component
 {
     public class ComponentAnimEventListener : MonoBehaviour
     {

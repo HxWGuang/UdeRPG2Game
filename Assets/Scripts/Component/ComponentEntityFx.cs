@@ -2,7 +2,7 @@ using System.Collections;
 using Hx.Utils;
 using UnityEngine;
 
-namespace Hx
+namespace Hx.Component
 {
     /// <summary>
     /// 受击闪烁效果组件

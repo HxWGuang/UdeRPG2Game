@@ -15,7 +15,7 @@ namespace Hx.Utils
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         [CanBeNull]
-        public static T GetComponentInChildDirectlyRecursion<T>(this GameObject parent, int maxDepth = 10) where T : Component
+        public static T GetComponentInChildDirectlyRecursion<T>(this GameObject parent, int maxDepth = 10) where T : UnityEngine.Component
         {
             if (maxDepth < 1) return null;
             if (maxDepth > 50) maxDepth = 50;
@@ -43,7 +43,7 @@ namespace Hx.Utils
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         [CanBeNull]
-        public static T GetComponentInChildDirectly<T>(this GameObject parent, int maxDepth = 10) where T : Component
+        public static T GetComponentInChildDirectly<T>(this GameObject parent, int maxDepth = 10) where T : UnityEngine.Component
         {
             if (maxDepth < 1) return null;
             

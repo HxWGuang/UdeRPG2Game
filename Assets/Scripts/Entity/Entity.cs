@@ -1,4 +1,5 @@
 using System.Collections;
+using Hx.Component;
 using UnityEngine;
 
 namespace Hx
