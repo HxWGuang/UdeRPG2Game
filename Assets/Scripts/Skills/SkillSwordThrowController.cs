@@ -13,10 +13,10 @@ namespace Hx.Skill
             animator = GetComponentInChildren<Animator>();
         }
 
-        public void Setup(Vector2 dir, float gravity)
+        public void Setup(Vector2 dir, float gravityScale)
         {
             rb.velocity = dir;
-            rb.gravityScale = gravity;
+            rb.gravityScale = gravityScale;
             
             animator.SetBool("Spin", true);
         }

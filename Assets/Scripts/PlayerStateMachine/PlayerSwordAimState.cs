@@ -21,6 +21,7 @@ namespace Hx.PlayerStateMachine
             
             isSwordThrow = false;
             player.SetZeroVelocity();
+            player.compSkillMgr.swordThrow.SetDotActive(true);
         }
 
         public override bool Update()
@@ -33,6 +34,7 @@ namespace Hx.PlayerStateMachine
                 isSwordThrow = true;
                 player.animator.SetBool("SwordAim", false);
                 // stateMachine.ChangeState(player.idleState);
+                player.compSkillMgr.swordThrow.SetDotActive(false);
                 return true;
             }
 
