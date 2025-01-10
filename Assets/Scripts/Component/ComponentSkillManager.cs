@@ -12,6 +12,7 @@ namespace Hx.Component
         
         [HideInInspector] public SkillDash dash;
         [HideInInspector] public SkillClone clone;
+        [HideInInspector] public SkillSwordThrow swordThrow;
 
         private void Awake()
         {
@@ -20,6 +21,7 @@ namespace Hx.Component
             
             dash = GetComponent<SkillDash>();
             clone = GetComponent<SkillClone>();
+            swordThrow = GetComponent<SkillSwordThrow>();
         }
     }
 }

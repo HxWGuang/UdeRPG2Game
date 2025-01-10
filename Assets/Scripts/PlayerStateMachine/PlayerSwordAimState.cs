@@ -10,6 +10,7 @@ namespace Hx.PlayerStateMachine
         {
             stateName = "SwordAim";
             player.compAnimEventListener.RegisterAnimationCb("SwordThrowEnd", OnSwordThrowEnd);
+            player.compAnimEventListener.RegisterAnimationCb("SwordThrow", OnSwordThrow);
         }
 
         public override void Enter()
@@ -52,12 +53,16 @@ namespace Hx.PlayerStateMachine
             Debug.Log("Exit SwordAim");
         }
 
+        private void OnSwordThrow()
+        {
+            Debug.Log("OnSwordThrow");
+            player.compSkillMgr.swordThrow.UseSkill();
+        }
+        
         private void OnSwordThrowEnd()
         {
             Debug.Log("OnSwordThrowEnd");
             stateMachine.ChangeState(player.idleState);
-            
-            // TODO：丢出剑
         }
     }
 }

@@ -7603,6 +7603,7 @@ GameObject:
   - component: {fileID: 1111563845}
   - component: {fileID: 1111563844}
   - component: {fileID: 1111563843}
+  - component: {fileID: 1111563846}
   m_Layer: 6
   m_Name: Skill
   m_TagString: Untagged
@@ -7666,6 +7667,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dash: {fileID: 0}
   clone: {fileID: 0}
+  swordThrow: {fileID: 0}
+--- !u!114 &1111563846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111563841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce3c1cfbc1b41be8c09e5d5d3f61218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  swordPrefab: {fileID: 15617707489993295, guid: dce3822dcb6694469925f77eb5f0ceeb, type: 3}
+  _throwDir: {x: 15, y: 25}
 --- !u!1 &1159449768
 GameObject:
   m_ObjectHideFlags: 0
@@ -7699,6 +7716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dash: {fileID: 0}
   clone: {fileID: 0}
+  swordThrow: {fileID: 0}
 --- !u!4 &1159449770
 Transform:
   m_ObjectHideFlags: 0
