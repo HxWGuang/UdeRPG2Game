@@ -48,6 +48,8 @@ namespace Hx
         public PlayerWallJumpState wallJumpState { get; private set; }
         public PlayerPrimaryAttackState primaryAttackState { get; private set; }
         public PlayerCounterAttackState counterAttackState { get; private set; }
+        public PlayerSwordAimState swordAimState { get; private set; }
+        public PlayerSwordCatchState swordCatchState { get; private set; }
 
         #endregion
 
@@ -67,6 +69,8 @@ namespace Hx
             wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
             primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
             counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
+            swordAimState = new PlayerSwordAimState(this, stateMachine, "SwordAim");
+            swordCatchState = new PlayerSwordCatchState(this, stateMachine, "SwordCatch");
         }
 
         protected override void Start()

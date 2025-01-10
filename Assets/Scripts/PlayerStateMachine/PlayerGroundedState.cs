@@ -18,8 +18,14 @@ namespace Hx.PlayerStateMachine
         public override bool Update()
         {
             if (base.Update()) return true;
-
+            
             if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                stateMachine.ChangeState(player.swordAimState);
+                return true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 stateMachine.ChangeState(player.counterAttackState);
                 return true;
