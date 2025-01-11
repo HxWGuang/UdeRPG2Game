@@ -29,6 +29,7 @@ namespace Hx.Skill
                 {
                     G.player.isSwordThrowing = false;
                     transform.SetParent(null);
+                    G.player.stateMachine.ChangeState(G.player.swordCatchState);
                     G.player.compSkillMgr.swordThrow.swordPool.Return(gameObject);
                 }
             }
@@ -50,15 +51,17 @@ namespace Hx.Skill
 
         public void SwordGoBack()
         {
-            isUpdateSwordDir = true;
-            rb.constraints = RigidbodyConstraints2D.None;
+            isSwordReturning = true;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
             rb.bodyType = RigidbodyType2D.Kinematic;
             animator.SetBool("Spin", true);
-            isSwordReturning = true;
         }
 
         public void OnTriggerEnter2D(Collider2D other)
         {
+            // 在回来的途中碰到的东西不再触发
+            if (isSwordReturning) return;
+            
             isUpdateSwordDir = false;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             rb.bodyType = RigidbodyType2D.Kinematic;

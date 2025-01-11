@@ -4,11 +4,15 @@ namespace Hx.PlayerStateMachine
 {
     public class PlayerSwordAimState : PlayerState
     {
+        private Camera cam;
+        
         public PlayerSwordAimState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
             stateName = "SwordAim";
             player.compAnimEventListener.RegisterAnimationCb("SwordThrowEnd", OnSwordThrowEnd);
             player.compAnimEventListener.RegisterAnimationCb("SwordThrow", OnSwordThrow);
+            
+            cam = Camera.main;
         }
 
         public override void Enter()
@@ -25,21 +29,19 @@ namespace Hx.PlayerStateMachine
         {
             if (base.Update()) return true;
 
-            if (player.HasSwordInHand() && Input.GetKeyUp(KeyCode.Mouse1))
+            if (Input.GetKeyUp(KeyCode.Mouse1))
             {
                 Debug.Log("Mouse1 up");
                 player.animator.SetBool("SwordAim", false);
-                // stateMachine.ChangeState(player.idleState);
                 player.compSkillMgr.swordThrow.SetDotActive(false);
                 return true;
             }
-
-            // if (!isSwordThrow && Input.GetKeyDown(KeyCode.Mouse0))
-            // {
-            //     Debug.Log("Mouse0 pressed");
-            //     isSwordThrow = true;
-            //     player.animator.SetBool("SwordAim", false);
-            // }
+            
+            // Hero根据鼠标位置决定是否翻转
+            if(cam.ScreenToWorldPoint(Input.mousePosition).x > player.transform.position.x && !player.facingRight)
+                player.Flip();
+            else if(cam.ScreenToWorldPoint(Input.mousePosition).x < player.transform.position.x && player.facingRight)
+                player.Flip();
 
             return false;
         }
@@ -49,6 +51,8 @@ namespace Hx.PlayerStateMachine
             base.Exit();
             
             Debug.Log("Exit SwordAim");
+
+            player.StartCoroutine("BusyFor", 0.2f);
         }
 
         private void OnSwordThrow()

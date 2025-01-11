@@ -13,6 +13,7 @@ namespace Hx.Skill
         [SerializeField] private Vector2 throwSpeed;
         [SerializeField] private float gravityScale;
         [SerializeField] private float swordReturnSpeed = 12;
+        [SerializeField] public Vector2 swordReturnImpact;
         
         [Header("Aim Dot")]
         [SerializeField] private Transform dotParent;
@@ -20,7 +21,7 @@ namespace Hx.Skill
         [SerializeField] private int numOfDot;
         [SerializeField] private float aimDotSpace;
         private GameObject[] aimDots;
-        private GameObject throwingSwrodGO;
+        public GameObject throwingSwrodGO { get; private set; }
 
         private void Awake()
         {
