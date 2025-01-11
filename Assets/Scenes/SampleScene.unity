@@ -3982,6 +3982,7 @@ MonoBehaviour:
   dashDir: 0
   comboWindow: 1
   counterAttackWindow: 0.3
+  isSwordThrowing: 0
   curState: 
 --- !u!50 &501584958
 Rigidbody2D:
@@ -7714,10 +7715,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   swordPrefab: {fileID: 15617707489993295, guid: dce3822dcb6694469925f77eb5f0ceeb, type: 3}
+  throwSpeed: {x: 35, y: 30}
+  gravityScale: 4.5
+  swordReturnSpeed: 16
   dotParent: {fileID: 503257815}
   dotPrefab: {fileID: 8594476199487607970, guid: bf481cb6450b14dbc9e3d1776b7f9f3e, type: 3}
-  throwSpeed: {x: 15, y: 20}
-  gravityScale: 1
   numOfDot: 20
   aimDotSpace: 0.075
 --- !u!1 &1159449768

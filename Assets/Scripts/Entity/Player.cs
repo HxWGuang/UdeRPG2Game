@@ -25,6 +25,8 @@ namespace Hx
         public float comboWindow = 1f;
         public float counterAttackWindow = 0.5f;
 
+        public bool isSwordThrowing = false;
+
         [Header("Debug")] 
         public string curState;
         
@@ -90,6 +92,11 @@ namespace Hx
             // isGrounded = GroundedCheck();
             stateMachine.currentState.Update();
             CheckDashInput();
+        }
+        
+        public bool HasSwordInHand()
+        {
+            return !isSwordThrowing;
         }
 
         private void CheckDashInput()

@@ -7,20 +7,24 @@ namespace Hx.Skill
     public class SkillSwordThrow : SkillBase
     {
         [SerializeField] private GameObject swordPrefab;
-        private ObjectPool<GameObject> swordPool;
-
+        public ObjectPool<GameObject> swordPool;
+        
+        [Header("Sword Info")]
+        [SerializeField] private Vector2 throwSpeed;
+        [SerializeField] private float gravityScale;
+        [SerializeField] private float swordReturnSpeed = 12;
+        
         [Header("Aim Dot")]
         [SerializeField] private Transform dotParent;
         [SerializeField] private GameObject dotPrefab;
-        [SerializeField] private Vector2 throwSpeed;
-        [SerializeField] private float gravityScale;
         [SerializeField] private int numOfDot;
         [SerializeField] private float aimDotSpace;
         private GameObject[] aimDots;
+        private GameObject throwingSwrodGO;
 
         private void Awake()
         {
-            swordPool = new ObjectPool<GameObject>(swordPrefab, 10);
+            swordPool = new ObjectPool<GameObject>(swordPrefab, 10, OnGetObj, OnReturnObj, OnDestroyObj);
             
             aimDots = new GameObject[numOfDot];
             for (int i = 0; i < numOfDot; i++)
@@ -44,17 +48,37 @@ namespace Hx.Skill
 
         public override bool CheckCanUse()
         {
-            return base.CheckCanUse();
+            if (!base.CheckCanUse()) return false;
+            if (G.player.isSwordThrowing) return false;
+            return true;
         }
 
         public override void UseSkill()
         {
             base.UseSkill();
-            
-            var sword = swordPool.Get();
+
+            var sword = throwingSwrodGO;
+            if (sword == null)
+            {
+                sword = swordPool.Get();
+                throwingSwrodGO = sword;
+            }
             sword.transform.position = G.player.transform.position;
             sword.transform.rotation = G.player.transform.rotation;
-            sword.GetComponent<SkillSwordThrowController>().Setup(GetAimDir() * throwSpeed, gravityScale);
+            sword.GetComponent<SkillSwordThrowController>().Setup(GetAimDir() * throwSpeed, gravityScale, swordReturnSpeed);
+            
+            G.player.isSwordThrowing = true;
+        }
+
+        public void CallSwordBack()
+        {
+            if (throwingSwrodGO != null)
+            {
+                throwingSwrodGO.GetComponent<SkillSwordThrowController>().SwordGoBack();
+            } else
+            {
+                Debug.LogError("swordThrowing is null");
+            }
         }
 
         public void SetDotActive(bool show)
@@ -84,15 +108,18 @@ namespace Hx.Skill
         {
             obj.SetActive(true);
         }
+        
 
         private void OnReturnObj(GameObject obj)
         {
             obj.SetActive(false);
+            throwingSwrodGO = null;
         }
 
         private void OnDestroyObj(GameObject obj)
         {
             Destroy(obj);
+            throwingSwrodGO = null;
         }
     }
 }

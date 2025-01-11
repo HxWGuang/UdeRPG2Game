@@ -4,8 +4,6 @@ namespace Hx.PlayerStateMachine
 {
     public class PlayerSwordAimState : PlayerState
     {
-        private bool isSwordThrow;
-        
         public PlayerSwordAimState(Player player, StateMachine stateMachine, string animBoolParaName) : base(player, stateMachine, animBoolParaName)
         {
             stateName = "SwordAim";
@@ -19,7 +17,6 @@ namespace Hx.PlayerStateMachine
 
             Debug.Log("Enter SwordAim");
             
-            isSwordThrow = false;
             player.SetZeroVelocity();
             player.compSkillMgr.swordThrow.SetDotActive(true);
         }
@@ -27,11 +24,10 @@ namespace Hx.PlayerStateMachine
         public override bool Update()
         {
             if (base.Update()) return true;
-            
-            if (!isSwordThrow && Input.GetKeyUp(KeyCode.Mouse1))
+
+            if (player.HasSwordInHand() && Input.GetKeyUp(KeyCode.Mouse1))
             {
                 Debug.Log("Mouse1 up");
-                isSwordThrow = true;
                 player.animator.SetBool("SwordAim", false);
                 // stateMachine.ChangeState(player.idleState);
                 player.compSkillMgr.swordThrow.SetDotActive(false);

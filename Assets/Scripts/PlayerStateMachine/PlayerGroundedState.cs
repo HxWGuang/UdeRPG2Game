@@ -21,8 +21,14 @@ namespace Hx.PlayerStateMachine
             
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                stateMachine.ChangeState(player.swordAimState);
-                return true;
+                if (player.compSkillMgr.swordThrow.CheckCanUse())
+                {
+                    stateMachine.ChangeState(player.swordAimState);
+                    return true;
+                } else if (!player.HasSwordInHand())
+                {
+                    player.compSkillMgr.swordThrow.CallSwordBack();
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
