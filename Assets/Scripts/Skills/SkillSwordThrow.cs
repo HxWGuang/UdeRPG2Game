@@ -4,6 +4,17 @@ using UnityEngine;
 
 namespace Hx.Skill
 {
+    public sealed class SkillSwordThrowConfig
+    {
+        public Vector2 dir;
+        public Vector2 throwSpeed;
+        public float gravityScale;
+        public float returnSpeed;
+
+        public float bounceTimes;
+        public float bounceSpeed;
+    }
+    
     public class SkillSwordThrow : SkillBase
     {
         [SerializeField] private GameObject swordPrefab;
@@ -14,6 +25,10 @@ namespace Hx.Skill
         [SerializeField] private float gravityScale;
         [SerializeField] private float swordReturnSpeed = 12;
         [SerializeField] public Vector2 swordReturnImpact;
+
+        [Header("Bounce Info")] 
+        [SerializeField] private float bounceTimes = 4;
+        [SerializeField] private float bounceSpeed = 20;
         
         [Header("Aim Dot")]
         [SerializeField] private Transform dotParent;
@@ -66,7 +81,18 @@ namespace Hx.Skill
             }
             sword.transform.position = G.player.transform.position;
             sword.transform.rotation = G.player.transform.rotation;
-            sword.GetComponent<SkillSwordThrowController>().Setup(GetAimDir() * throwSpeed, gravityScale, swordReturnSpeed);
+            
+            var config = new SkillSwordThrowConfig
+            {
+                dir = GetAimDir(),
+                throwSpeed = throwSpeed,
+                gravityScale = gravityScale,
+                returnSpeed = swordReturnSpeed,
+                bounceTimes = bounceTimes,
+                bounceSpeed = bounceSpeed
+            };
+            
+            sword.GetComponent<SkillSwordThrowController>().Setup(config);
             
             G.player.isSwordThrowing = true;
         }

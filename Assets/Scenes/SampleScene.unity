@@ -12538,6 +12538,8 @@ MonoBehaviour:
   gravityScale: 4.5
   swordReturnSpeed: 16
   swordReturnImpact: {x: 5, y: 0}
+  bounceTimes: 4
+  bounceSpeed: 20
   dotParent: {fileID: 503257815}
   dotPrefab: {fileID: 8594476199487607970, guid: bf481cb6450b14dbc9e3d1776b7f9f3e, type: 3}
   numOfDot: 20

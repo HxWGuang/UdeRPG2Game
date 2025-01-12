@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Hx.Module;
 using UnityEngine;
 
@@ -7,20 +8,45 @@ namespace Hx.Skill
     {
         private Rigidbody2D rb;
         private Animator animator;
-        private bool isUpdateSwordDir = false;
-        private bool isSwordReturning = false;
+        private bool isUpdateSwordDir;
+        private bool isSwordReturning;
         private float swordReturningSpeed;
+        private float bounceTimes;
+        private float bonceSpeed;
+        private List<Transform> bounceTargets;
+        private bool canBouncing;
+        private int bounceIndex;
 
         private void Awake()
         {
             rb = GetComponentInChildren<Rigidbody2D>();
             animator = GetComponentInChildren<Animator>();
+            bounceTargets = new List<Transform>();
         }
 
         private void Update()
         {
             if (isUpdateSwordDir)
                 gameObject.transform.right = rb.velocity;
+
+            if (canBouncing && bounceTargets.Count > 0)
+            {
+                if (bounceIndex >= bounceTargets.Count) bounceIndex = 0;
+                var target = bounceTargets[bounceIndex];
+                transform.position = Vector2.MoveTowards(transform.position, target.position, bonceSpeed * Time.deltaTime);
+                if (Vector2.Distance(transform.position, target.position) < 0.1f)
+                {
+                    bounceIndex++;
+                    bounceTimes--;
+                    if (bounceTimes <= 0)
+                    {
+                        canBouncing = false;
+                        bounceIndex = 0;
+                        bounceTargets.Clear();
+                        isSwordReturning = true;
+                    }
+                }
+            }
 
             if (isSwordReturning)
             {
@@ -35,16 +61,20 @@ namespace Hx.Skill
             }
         }
 
-        public void Setup(Vector2 dir, float gravityScale, float returningSpeed)
+        public void Setup(SkillSwordThrowConfig cfg)
         {
             isUpdateSwordDir = true;
+            isSwordReturning = false;
+            canBouncing = true;
+            
             rb.constraints = RigidbodyConstraints2D.None;
             rb.bodyType = RigidbodyType2D.Dynamic;
-            
-            rb.velocity = dir;
-            rb.gravityScale = gravityScale;
-            swordReturningSpeed = returningSpeed;
-            isSwordReturning = false;
+
+            rb.velocity = cfg.dir * cfg.throwSpeed;
+            rb.gravityScale = cfg.gravityScale;
+            swordReturningSpeed = cfg.returnSpeed;
+            bounceTimes = cfg.bounceTimes;
+            bonceSpeed = cfg.bounceSpeed;
             
             animator.SetBool("Spin", true);
         }
@@ -62,11 +92,32 @@ namespace Hx.Skill
             // 在回来的途中碰到的东西不再触发
             if (isSwordReturning) return;
             
+            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                if (canBouncing && bounceTargets.Count <= 0)
+                {
+                    // 扫描附近的敌人
+                    var res = Physics2D.OverlapCircleAll(transform.position, 10, LayerMask.GetMask("Enemy"));
+                    foreach (var col in res)
+                    {
+                        if (col.GetComponent<Enemy>() != null)
+                            bounceTargets.Add(col.transform);
+                    }
+                }
+            }
+
+            StuckInto(other);
+        }
+
+        private void StuckInto(Collider2D col)
+        {
             isUpdateSwordDir = false;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             rb.bodyType = RigidbodyType2D.Kinematic;
-            gameObject.transform.SetParent(other.transform);
 
+            if (canBouncing) return;
+            
+            gameObject.transform.SetParent(col.transform);
             animator.SetBool("Spin", false);
         }
     }
