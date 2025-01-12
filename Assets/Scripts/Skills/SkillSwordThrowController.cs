@@ -42,8 +42,7 @@ namespace Hx.Skill
                     {
                         canBouncing = false;
                         bounceIndex = 0;
-                        bounceTargets.Clear();
-                        isSwordReturning = true;
+                        SwordGoBack();
                     }
                 }
             }
@@ -85,6 +84,8 @@ namespace Hx.Skill
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             rb.bodyType = RigidbodyType2D.Kinematic;
             animator.SetBool("Spin", true);
+            
+            bounceTargets.Clear();
         }
 
         public void OnTriggerEnter2D(Collider2D other)
