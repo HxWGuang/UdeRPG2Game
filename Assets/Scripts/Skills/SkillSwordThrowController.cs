@@ -91,10 +91,10 @@ namespace Hx.Skill
         {
             // 在回来的途中碰到的东西不再触发
             if (isSwordReturning) return;
-            
-            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+
+            if (canBouncing && bounceTargets.Count <= 0)
             {
-                if (canBouncing && bounceTargets.Count <= 0)
+                if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
                     // 扫描附近的敌人
                     var res = Physics2D.OverlapCircleAll(transform.position, 10, LayerMask.GetMask("Enemy"));
@@ -104,8 +104,9 @@ namespace Hx.Skill
                             bounceTargets.Add(col.transform);
                     }
                 }
+                if (bounceTargets.Count < 2) canBouncing = false;
             }
-
+            
             StuckInto(other);
         }
 
