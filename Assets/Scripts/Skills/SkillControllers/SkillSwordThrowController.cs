@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Hx;
 using Hx.Module;
+using Hx.Skill;
 using UnityEngine;
 
-namespace Hx.Skill
+namespace Skills.SkillControllers
 {
     public class SkillSwordThrowController : MonoBehaviour
     {
@@ -60,20 +62,26 @@ namespace Hx.Skill
             }
         }
 
-        public void Setup(SkillSwordThrowConfig cfg)
+        // public void Setup<TConfig>(TConfig cfg) where TConfig : SkillSwordConfigBase
+        public void Setup(SkillSwordConfig cfg)
         {
             isUpdateSwordDir = true;
             isSwordReturning = false;
-            canBouncing = true;
+            canBouncing = false;
             
             rb.constraints = RigidbodyConstraints2D.None;
             rb.bodyType = RigidbodyType2D.Dynamic;
-
-            rb.velocity = cfg.dir * cfg.throwSpeed;
-            rb.gravityScale = cfg.gravityScale;
-            swordReturningSpeed = cfg.returnSpeed;
-            bounceTimes = cfg.bounceTimes;
-            bonceSpeed = cfg.bounceSpeed;
+            
+            rb.velocity = cfg.baseCfg.dir * cfg.baseCfg.throwSpeed;
+            rb.gravityScale = cfg.baseCfg.gravityScale;
+            swordReturningSpeed = cfg.baseCfg.returnSpeed;
+            
+            if (cfg is SkillSwordConfigBounce bounceCfg)
+            {
+                canBouncing = true;
+                bounceTimes = bounceCfg.bounceTimes;
+                bonceSpeed = bounceCfg.bounceSpeed;
+            }
             
             animator.SetBool("Spin", true);
         }

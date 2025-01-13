@@ -1,8 +1,9 @@
-﻿using Hx.Component;
+﻿using Hx;
+using Hx.Component;
 using Hx.Module;
 using UnityEngine;
 
-namespace Hx.Skill
+namespace Skills.SkillControllers
 {
     public class SkillCloneController : MonoBehaviour
     {

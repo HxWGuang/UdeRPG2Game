@@ -12745,6 +12745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  swordType: 0
   swordPrefab: {fileID: 15617707489993295, guid: dce3822dcb6694469925f77eb5f0ceeb, type: 3}
   throwSpeed: {x: 35, y: 30}
   gravityScale: 4.5
