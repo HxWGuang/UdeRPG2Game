@@ -6814,17 +6814,17 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.7
+  m_ScreenY: 0.458
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.1
-  m_DeadZoneHeight: 0.192
+  m_DeadZoneHeight: 0.588
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.187
-  m_SoftZoneHeight: 0.522
+  m_SoftZoneHeight: 0.897
   m_BiasX: 0
-  m_BiasY: -0.4999999
-  m_CenterOnActivate: 1
+  m_BiasY: -0.5
+  m_CenterOnActivate: 0
   m_GroupFramingMode: 2
   m_AdjustmentMode: 0
   m_GroupFramingSize: 0.8
@@ -7288,7 +7288,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.96, y: -0.05000019, z: -10}
+  m_LocalPosition: {x: -5.96, y: 0.23900008, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7450,6 +7450,7 @@ MonoBehaviour:
   battleTime: 7
   counterImage: {fileID: 1246938897}
   curState: 
+  isStop: 1
 --- !u!61 &662400207
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7531,7 +7532,7 @@ Transform:
   m_GameObject: {fileID: 662400203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.21, y: 0.68, z: 0}
+  m_LocalPosition: {x: 5.86, y: 0.68, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13590,6 +13591,7 @@ MonoBehaviour:
   battleTime: 7
   counterImage: {fileID: 1370970821}
   curState: 
+  isStop: 1
 --- !u!61 &1598004721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13866,7 +13868,7 @@ Transform:
   m_GameObject: {fileID: 1702020040}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.96, y: -0.05000019, z: -10}
+  m_LocalPosition: {x: -5.96, y: 0.23900008, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14145,6 +14147,7 @@ MonoBehaviour:
   battleTime: 7
   counterImage: {fileID: 422362969}
   curState: 
+  isStop: 1
 --- !u!114 &1901307757
 MonoBehaviour:
   m_ObjectHideFlags: 0
