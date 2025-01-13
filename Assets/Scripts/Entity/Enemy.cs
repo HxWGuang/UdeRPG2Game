@@ -25,6 +25,7 @@ namespace Hx
 
         [Header("Debug")] 
         public string curState;
+        public bool isStop = false;
         
         public StateMachine stateMachine { get; private set; }
 
@@ -42,7 +43,8 @@ namespace Hx
         protected override void Update()
         {
             base.Update();
-            
+
+            if (isStop) return;
             stateMachine.currentState?.Update();
         }
 

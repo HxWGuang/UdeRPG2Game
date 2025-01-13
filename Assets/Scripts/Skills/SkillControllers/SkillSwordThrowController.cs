@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Hx;
 using Hx.Module;
-using Hx.Skill;
 using UnityEngine;
 
 namespace Skills.SkillControllers
@@ -13,11 +12,14 @@ namespace Skills.SkillControllers
         private bool isUpdateSwordDir;
         private bool isSwordReturning;
         private float swordReturningSpeed;
-        private float bounceTimes;
+        
+        private float bounceAmount;
         private float bonceSpeed;
         private List<Transform> bounceTargets;
         private bool canBouncing;
         private int bounceIndex;
+
+        private int pierceAmount;
 
         private void Awake()
         {
@@ -39,8 +41,8 @@ namespace Skills.SkillControllers
                 if (Vector2.Distance(transform.position, target.position) < 0.1f)
                 {
                     bounceIndex++;
-                    bounceTimes--;
-                    if (bounceTimes <= 0)
+                    bounceAmount--;
+                    if (bounceAmount <= 0)
                     {
                         canBouncing = false;
                         bounceIndex = 0;
@@ -62,8 +64,7 @@ namespace Skills.SkillControllers
             }
         }
 
-        // public void Setup<TConfig>(TConfig cfg) where TConfig : SkillSwordConfigBase
-        public void Setup(SkillSwordConfig cfg)
+        public void Setup(Vector2 dir, SkillSwordConfigBase cfg)
         {
             isUpdateSwordDir = true;
             isSwordReturning = false;
@@ -72,15 +73,20 @@ namespace Skills.SkillControllers
             rb.constraints = RigidbodyConstraints2D.None;
             rb.bodyType = RigidbodyType2D.Dynamic;
             
-            rb.velocity = cfg.baseCfg.dir * cfg.baseCfg.throwSpeed;
-            rb.gravityScale = cfg.baseCfg.gravityScale;
-            swordReturningSpeed = cfg.baseCfg.returnSpeed;
+            rb.velocity = dir * cfg.throwSpeed;
+            rb.gravityScale = cfg.gravityScale;
+            swordReturningSpeed = cfg.returnSpeed;
             
             if (cfg is SkillSwordConfigBounce bounceCfg)
             {
                 canBouncing = true;
-                bounceTimes = bounceCfg.bounceTimes;
+                bounceAmount = bounceCfg.bounceAmount;
                 bonceSpeed = bounceCfg.bounceSpeed;
+            }
+
+            if (cfg is SkillSwordConfigPierce pierceCfg)
+            {
+                pierceAmount = pierceCfg.pierceAmount;
             }
             
             animator.SetBool("Spin", true);

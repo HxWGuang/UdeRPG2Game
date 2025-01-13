@@ -2,9 +2,9 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace Hx.Editor
 {
-    public class Utils
+    public class EditorUtils
     {
         [InitializeOnLoad]
         public static class HierarchyObjectIconDrawer

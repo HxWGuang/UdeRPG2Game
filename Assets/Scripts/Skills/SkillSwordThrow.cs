@@ -11,25 +11,6 @@ namespace Hx.Skill
         Pierce,
         Spin
     }
-
-    public class SkillSwordConfigBase
-    {
-        public Vector2 dir;
-        public Vector2 throwSpeed;
-        public float gravityScale;
-        public float returnSpeed;
-    }
-
-    public class SkillSwordConfig
-    {
-        public SkillSwordConfigBase baseCfg;
-    }
-    public class SkillSwordConfigRegular : SkillSwordConfig {}
-    public sealed class SkillSwordConfigBounce : SkillSwordConfig
-    {
-        public float bounceTimes;
-        public float bounceSpeed;
-    }
     
     public class SkillSwordThrow : SkillBase
     {
@@ -37,6 +18,8 @@ namespace Hx.Skill
         [SerializeField] private GameObject swordPrefab;
         public ObjectPool<GameObject> swordPool;
         
+        
+        // **** 待删除 START **** //
         [Header("Sword Info")]
         [SerializeField] private Vector2 throwSpeed;
         [SerializeField] private float gravityScale;
@@ -46,6 +29,8 @@ namespace Hx.Skill
         [Header("Bounce Info")] 
         [SerializeField] private float bounceTimes = 4;
         [SerializeField] private float bounceSpeed = 20;
+        // **** 待删除 END **** //
+        
         
         [Header("Aim Dot")]
         [SerializeField] private Transform dotParent;
@@ -55,6 +40,8 @@ namespace Hx.Skill
         private GameObject[] aimDots;
         public GameObject throwingSwrodGO { get; private set; }
         private Camera cam;
+        
+        private SkillSwordConfigBase config;
 
         private void Awake()
         {
@@ -90,40 +77,29 @@ namespace Hx.Skill
             }
             sword.transform.position = G.player.transform.position;
             sword.transform.rotation = G.player.transform.rotation;
-
-            var baseCfg = new SkillSwordConfigBase()
-            {
-                dir = GetAimDir(),
-                throwSpeed = throwSpeed,
-                gravityScale = gravityScale,
-                returnSpeed = swordReturnSpeed,
-            };
             
-            SkillSwordConfig cfg = null;
             if (swordType == SwordType.Regular)
             {
-                cfg = new SkillSwordConfigRegular()
+                if (config is not SkillSwordConfigRegular)
                 {
-                    baseCfg = baseCfg
-                };
+                    config = Resources.Load<SkillSwordConfigRegular>("Config/SwordRegular");
+                }
             } else if (swordType == SwordType.Bounce)
             {
-                cfg = new SkillSwordConfigBounce()
+                if (config is not SkillSwordConfigBounce)
                 {
-                    baseCfg = baseCfg,
-                    bounceTimes = bounceTimes,
-                    bounceSpeed = bounceSpeed
-                };
+                    config = Resources.Load<SkillSwordConfigBounce>("Config/SwordBounce");
+                }
             }
             else
             {
-                cfg = new SkillSwordConfigRegular()
+                if (config is not SkillSwordConfigRegular)
                 {
-                    baseCfg = baseCfg
-                };
+                    config = Resources.Load<SkillSwordConfigRegular>("Config/SwordRegular");
+                }
             }
-            
-            sword.GetComponent<SkillSwordThrowController>().Setup(cfg);
+
+            sword.GetComponent<SkillSwordThrowController>().Setup(GetAimDir(), config);
             
             G.player.isSwordThrowing = true;
         }
