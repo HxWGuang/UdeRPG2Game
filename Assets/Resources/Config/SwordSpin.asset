@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a823d419fdf645c18debc871d9f89fd0, type: 3}
-  m_Name: SwordRegular
-  m_EditorClassIdentifier: Assembly-CSharp:Hx:SkillSwordConfigRegular
-  throwSpeed: {x: 35, y: 30}
-  gravityScale: 4.5
-  returnSpeed: 16
-  returnImpact: {x: 5, y: 0}
+  m_Script: {fileID: 11500000, guid: bc5272c7006f49baab67adc7bcc9eb86, type: 3}
+  m_Name: SwordSpin
+  m_EditorClassIdentifier: 
+  throwSpeed: {x: 0, y: 0}
+  gravityScale: 0
+  returnSpeed: 0
+  returnImpact: {x: 0, y: 0}

@@ -14,21 +14,44 @@ namespace Hx.Skill
     
     public class SkillSwordThrow : SkillBase
     {
-        public SwordType swordType = SwordType.Regular;
+        private SwordType _swordType = SwordType.Regular; 
+        public SwordType swordType
+        {
+            get => _swordType;
+            set
+            {
+                _swordType = value;
+                switch (value)
+                {
+                    case SwordType.Regular:
+                        if (config is not SkillSwordConfigRegular) config = Resources.Load<SkillSwordConfigRegular>("Config/SwordRegular");
+                        break;
+                    case SwordType.Bounce:
+                        if (config is not SkillSwordConfigBounce) config = Resources.Load<SkillSwordConfigBounce>("Config/SwordBounce");
+                        break;
+                    case SwordType.Pierce:
+                        if (config is not SkillSwordConfigPierce) config = Resources.Load<SkillSwordConfigPierce>("Config/SwordPierce");
+                        break;
+                    case SwordType.Spin:
+                        if (config is not SkillSwordConfigSpin) config = Resources.Load<SkillSwordConfigSpin>("Config/SwordSpin");
+                        break;
+                }
+            }
+        }
         [SerializeField] private GameObject swordPrefab;
         public ObjectPool<GameObject> swordPool;
         
         
         // **** 待删除 START **** //
-        [Header("Sword Info")]
-        [SerializeField] private Vector2 throwSpeed;
-        [SerializeField] private float gravityScale;
-        [SerializeField] private float swordReturnSpeed = 12;
-        [SerializeField] public Vector2 swordReturnImpact;
-
-        [Header("Bounce Info")] 
-        [SerializeField] private float bounceTimes = 4;
-        [SerializeField] private float bounceSpeed = 20;
+        // [Header("Sword Info")]
+        // [SerializeField] private Vector2 throwSpeed;
+        // [SerializeField] private float gravityScale;
+        // [SerializeField] private float swordReturnSpeed = 12;
+        // [SerializeField] public Vector2 swordReturnImpact;
+        //
+        // [Header("Bounce Info")] 
+        // [SerializeField] private float bounceTimes = 4;
+        // [SerializeField] private float bounceSpeed = 20;
         // **** 待删除 END **** //
         
         
@@ -41,12 +64,13 @@ namespace Hx.Skill
         public GameObject throwingSwrodGO { get; private set; }
         private Camera cam;
         
-        private SkillSwordConfigBase config;
+        public SkillSwordConfigBase config;
 
         private void Awake()
         {
             cam = Camera.main;
             swordPool = new ObjectPool<GameObject>(swordPrefab, 10, OnGetObj, OnReturnObj, OnDestroyObj);
+            config = Resources.Load<SkillSwordConfigRegular>("Config/SwordRegular");
             
             GenerateDots();
         }
@@ -78,26 +102,32 @@ namespace Hx.Skill
             sword.transform.position = G.player.transform.position;
             sword.transform.rotation = G.player.transform.rotation;
             
-            if (swordType == SwordType.Regular)
-            {
-                if (config is not SkillSwordConfigRegular)
-                {
-                    config = Resources.Load<SkillSwordConfigRegular>("Config/SwordRegular");
-                }
-            } else if (swordType == SwordType.Bounce)
-            {
-                if (config is not SkillSwordConfigBounce)
-                {
-                    config = Resources.Load<SkillSwordConfigBounce>("Config/SwordBounce");
-                }
-            }
-            else
-            {
-                if (config is not SkillSwordConfigRegular)
-                {
-                    config = Resources.Load<SkillSwordConfigRegular>("Config/SwordRegular");
-                }
-            }
+            // if (swordType == SwordType.Regular)
+            // {
+            //     if (config is not SkillSwordConfigRegular)
+            //     {
+            //         config = Resources.Load<SkillSwordConfigRegular>("Config/SwordRegular");
+            //     }
+            // } else if (swordType == SwordType.Bounce)
+            // {
+            //     if (config is not SkillSwordConfigBounce)
+            //     {
+            //         config = Resources.Load<SkillSwordConfigBounce>("Config/SwordBounce");
+            //     }
+            // } else if (swordType == SwordType.Pierce)
+            // {
+            //     if (config is not SkillSwordConfigPierce)
+            //     {
+            //         config = Resources.Load<SkillSwordConfigPierce>("Config/SwordPierce");
+            //     }
+            // }
+            // else
+            // {
+            //     if (config is not SkillSwordConfigRegular)
+            //     {
+            //         config = Resources.Load<SkillSwordConfigRegular>("Config/SwordRegular");
+            //     }
+            // }
 
             sword.GetComponent<SkillSwordThrowController>().Setup(GetAimDir(), config);
             
@@ -154,8 +184,8 @@ namespace Hx.Skill
         private Vector2 GetDotPosition(Vector2 dir, float t)
         {
             var playerPos = (Vector2)G.player.transform.position;
-            var deltaPos = new Vector2(dir.x * throwSpeed.x * t,
-                dir.y * throwSpeed.y * t + .5f * Physics2D.gravity.y * gravityScale * t * t);
+            var deltaPos = new Vector2(dir.x * config.throwSpeed.x * t,
+                dir.y * config.throwSpeed.y * t + .5f * Physics2D.gravity.y * config.gravityScale * t * t);
             return playerPos + deltaPos;
         }
         #endregion

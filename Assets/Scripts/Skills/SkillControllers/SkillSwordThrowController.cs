@@ -11,6 +11,7 @@ namespace Skills.SkillControllers
         private Animator animator;
         private bool isUpdateSwordDir;
         private bool isSwordReturning;
+        private bool isSwordSpinWhenMove;
         private float swordReturningSpeed;
         
         private float bounceAmount;
@@ -42,6 +43,12 @@ namespace Skills.SkillControllers
                 {
                     bounceIndex++;
                     bounceAmount--;
+                    var enemy = target.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.DoDamage();
+                        Debug.Log("Do Bounce Damage");
+                    }
                     if (bounceAmount <= 0)
                     {
                         canBouncing = false;
@@ -76,20 +83,24 @@ namespace Skills.SkillControllers
             rb.velocity = dir * cfg.throwSpeed;
             rb.gravityScale = cfg.gravityScale;
             swordReturningSpeed = cfg.returnSpeed;
+
+            isSwordSpinWhenMove = true;
             
             if (cfg is SkillSwordConfigBounce bounceCfg)
             {
                 canBouncing = true;
                 bounceAmount = bounceCfg.bounceAmount;
                 bonceSpeed = bounceCfg.bounceSpeed;
+                isSwordSpinWhenMove = true;
             }
 
             if (cfg is SkillSwordConfigPierce pierceCfg)
             {
                 pierceAmount = pierceCfg.pierceAmount;
+                isSwordSpinWhenMove = false;
             }
             
-            animator.SetBool("Spin", true);
+            animator.SetBool("Spin", isSwordSpinWhenMove);
         }
 
         public void SwordGoBack()
@@ -97,7 +108,7 @@ namespace Skills.SkillControllers
             isSwordReturning = true;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             rb.bodyType = RigidbodyType2D.Kinematic;
-            animator.SetBool("Spin", true);
+            animator.SetBool("Spin", isSwordSpinWhenMove);
             
             bounceTargets.Clear();
         }
@@ -106,6 +117,20 @@ namespace Skills.SkillControllers
         {
             // 在回来的途中碰到的东西不再触发
             if (isSwordReturning) return;
+
+            if (pierceAmount > 0)
+            {
+                if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    var enemy = other.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.DoDamage();
+                        Debug.Log("Do Piercing Damage");
+                        pierceAmount--;
+                    }
+                }
+            }
 
             if (canBouncing && bounceTargets.Count <= 0)
             {
@@ -127,6 +152,11 @@ namespace Skills.SkillControllers
 
         private void StuckInto(Collider2D col)
         {
+            if (pierceAmount > 0 && col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                return;
+            }
+            
             isUpdateSwordDir = false;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             rb.bodyType = RigidbodyType2D.Kinematic;

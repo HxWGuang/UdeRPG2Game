@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Hx.Skill;
+using UnityEngine;
 
 namespace Hx.PlayerStateMachine
 {
@@ -18,6 +19,14 @@ namespace Hx.PlayerStateMachine
         public override bool Update()
         {
             if (base.Update()) return true;
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                var idx = (int)player.compSkillMgr.swordThrow.swordType;
+                idx += 1;
+                idx %= 4;
+                player.compSkillMgr.swordThrow.swordType = (SwordType)idx;
+            }
             
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {

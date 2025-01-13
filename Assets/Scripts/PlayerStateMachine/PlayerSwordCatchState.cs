@@ -23,7 +23,7 @@ namespace Hx.PlayerStateMachine
                 player.Flip();
             
             // 增加一些冲击力
-            var impact = player.compSkillMgr.swordThrow.swordReturnImpact;
+            var impact = player.compSkillMgr.swordThrow.config.returnImpact;
             player.rb.velocity = new Vector2(-player.facingDir * impact.x, impact.y);
         }
 

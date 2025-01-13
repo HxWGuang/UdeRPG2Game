@@ -18,8 +18,6 @@ namespace Hx.PlayerStateMachine
         public override void Enter()
         {
             base.Enter();
-
-            Debug.Log("Enter SwordAim");
             
             player.SetZeroVelocity();
             player.compSkillMgr.swordThrow.SetDotActive(true);
@@ -31,7 +29,6 @@ namespace Hx.PlayerStateMachine
 
             if (Input.GetKeyUp(KeyCode.Mouse1))
             {
-                Debug.Log("Mouse1 up");
                 player.animator.SetBool("SwordAim", false);
                 player.compSkillMgr.swordThrow.SetDotActive(false);
                 return true;
@@ -49,21 +46,17 @@ namespace Hx.PlayerStateMachine
         public override void Exit()
         {
             base.Exit();
-            
-            Debug.Log("Exit SwordAim");
 
             player.StartCoroutine("BusyFor", 0.2f);
         }
 
         private void OnSwordThrow()
         {
-            Debug.Log("OnSwordThrow");
             player.compSkillMgr.swordThrow.UseSkill();
         }
         
         private void OnSwordThrowEnd()
         {
-            Debug.Log("OnSwordThrowEnd");
             stateMachine.ChangeState(player.idleState);
         }
     }
