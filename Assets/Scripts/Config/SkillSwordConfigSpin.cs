@@ -6,5 +6,8 @@ namespace Hx
 
     public class SkillSwordConfigSpin : SkillSwordConfigBase
     {
+        public float maxFlyingDistance = 7;
+        public float hitCooldown = 0.5f;
+        public float spinDuration = 2f;
     }
 }

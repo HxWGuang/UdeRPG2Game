@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5272c7006f49baab67adc7bcc9eb86, type: 3}
   m_Name: SwordSpin
   m_EditorClassIdentifier: 
-  throwSpeed: {x: 0, y: 0}
-  gravityScale: 0
-  returnSpeed: 0
-  returnImpact: {x: 0, y: 0}
+  throwSpeed: {x: 35, y: 30}
+  gravityScale: 0.4
+  returnSpeed: 20
+  returnImpact: {x: 5, y: 0}
+  maxFlyingDistance: 7
+  hitCooldown: 0.5
+  spinDuration: 2
